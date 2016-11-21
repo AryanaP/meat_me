@@ -1,0 +1,10 @@
+<%= simple_form_for @user do |f| %>
+  <%= f.input :first_name, label_input: "First Name" %>
+  <%= f.input :last_name, label_input: "Last Name" %>
+  <%= f.input :description, label_input: "About me" %>
+  <%= f.input :age %>
+  <%= f.input :gender, collection: [ "Male", "Female"] %>
+  <%= f.input :phone_number %>
+  <%= f.input :email %>
+  <%= f.button :submit %>
+<% end %>
