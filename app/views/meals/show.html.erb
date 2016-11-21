@@ -1,14 +1,12 @@
 <h1>Your meal is:</h1>
-<tbody>
-      <tr>
-        <td><%= @meal.name %></td>
-        <td><%= @meal.address %></td>
-        <td><%= @meal.city %></td>
-        <td><%= @meal.date %></td>
-        <td><%= @meal.date %></td>
-        <td><%= @meal.description %></td>
-        <td><%= @meal.food_type %></td>
-        <td><%= @meal.meeting_type %></td>
-        <td><%= link_to 'Edit', edit_meal_path(@meal) %></td>
-      </tr>
-  </tbody>
+<br>
+<ul class="list-unordered">
+  <li><%= @meal.name %></li>
+  <li><%= @meal.address %></li>
+  <li><%= @meal.city %></li>
+  <li><%= @meal.date %></li>
+  <li><%= @meal.description %></li>
+  <li><%= @meal.food_type %></li>
+  <li><%= @meal.meeting_type %></li>
+  <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
+</ul>

@@ -3,18 +3,18 @@
 <h1>Meals</h1>
 
  <% @meals.each do |meal| %>
- <tr>
- <td><%= meal.name %></td>
- <td><%= meal.address %></td>
- <td><%= meal.city %></td>
- <td><%= meal.date %></td>
- <td><%= meal.date %></td>
- <td><%= meal.description %></td>
- <td><%= meal.food_type %></td>
- <td><%= meal.meeting_type %></td>
- <td><%= link_to 'Show', meal %></td>
- <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
- </tr>
+ <ul class="list-unordered">
+   <li><%= meal.name %></li>
+   <li><%= meal.address %></li>
+   <li><%= meal.city %></li>
+   <li><%= meal.date %></li>
+   <li><%= meal.date %></li>
+   <li><%= meal.description %></li>
+   <li><%= meal.food_type %></li>
+   <li><%= meal.meeting_type %></li>
+   <li><%= link_to 'Show', meal %></li>
+   <li><%= link_to 'Edit', edit_meal_path(meal) %></li>
+ </ul>
  <% end %>
 
 
