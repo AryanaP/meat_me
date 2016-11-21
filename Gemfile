@@ -14,6 +14,7 @@ gem 'uglifier'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
+gem 'simple_form_fancy_uploads'
 gem 'autoprefixer-rails'
 gem 'devise'
 
