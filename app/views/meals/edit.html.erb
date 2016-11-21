@@ -1,0 +1,21 @@
+<h1>Edit your meal</h1>
+
+<%= simple_form_for(@meal) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.input :date %>
+    <%= f.input :description %>
+    <%= f.input :food_type %>
+    <%= f.input :meeting_type %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', meals_path %>

@@ -1,0 +1,14 @@
+<h1>Your meal is:</h1>
+<tbody>
+      <tr>
+        <td><%= @meal.name %></td>
+        <td><%= @meal.address %></td>
+        <td><%= @meal.city %></td>
+        <td><%= @meal.date %></td>
+        <td><%= @meal.date %></td>
+        <td><%= @meal.description %></td>
+        <td><%= @meal.food_type %></td>
+        <td><%= @meal.meeting_type %></td>
+        <td><%= link_to 'Edit', edit_meal_path(@meal) %></td>
+      </tr>
+  </tbody>
