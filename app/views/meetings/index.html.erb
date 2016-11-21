@@ -1,0 +1,36 @@
+
+<h1 class="text-center">My dates</h1>
+
+<div class="container">
+  <div class="row">
+  <% @host_meetings.each do |meeting| %>
+    <div class="col-xs-12 col-sm-4">
+      <div class="card"><%= cl_image_tag("#", width: 300, height: 180, crop: :fill) %>
+        <div class="card-category">Host</div>
+        <div class="card-description">
+          <h2><%= meeting.meal.name %></h2>
+          <ul class="list-inline">
+            <li><%= link_to 'Approve', approve_meeting_path(meeting), class: "btn btn-xs btn-primary" %></li>
+            <li><%= link_to 'Deny', deny_meeting_path(meeting), class: "btn btn-xs btn-primary" %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+  <% @guest_meetings.each do |meeting| %>
+    <div class="col-xs-12 col-sm-4">
+      <div class="card"><%= cl_image_tag("#", width: 300, height: 180, crop: :fill) %>
+        <div class="card-category">Host</div>
+        <div class="card-description">
+          <h2><%= meeting.meal.name %></h2>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
