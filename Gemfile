@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'simple_form_fancy_uploads'
 gem 'autoprefixer-rails'
 gem 'devise'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'binding_of_caller'
