@@ -13,7 +13,11 @@
   <div class= "row">
     <% @meals.each do |meal| %>
     <div class="col-xs-12 col-sm-4">
-      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+      <% if meal.photos? %>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path meal.photos.first.path, height: 175, width: 360, crop: :fill; %>');">
+        <% else %>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+      <% end %>
         <div class="card-category"><%= meal.city %></div>
         <div class="card-description">
           <h2><%= meal.user.first_name %></h2>
@@ -26,5 +30,3 @@
     <% end %>
   </div>
 </div>
-
-
