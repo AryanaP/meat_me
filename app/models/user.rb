@@ -7,11 +7,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :first_name, presence:true
-  validates :last_name, presence:true
-  validates :gender, presence:true, inclusion: {in: ["Male", "Female"], message: "%{value} is not a valid gender" }
+  # validates :first_name, presence:true
+  # validates :last_name, presence:true
+  # validates :gender, presence:true, inclusion: {in: ["Male", "Female"], message: "%{value} is not a valid gender" }
   # validates :photo, presence:true
-  validates :description, presence:true
+  # validates :description, presence:true
 
 
 end
