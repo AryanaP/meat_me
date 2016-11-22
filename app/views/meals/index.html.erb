@@ -1,17 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-  <h1>Meals</h1>
 
 
-<div class="container card-container">
-<h2> List of meals proposed</h2>
-
+<div class="container card-container padded">
  <div class="row row-grid">
   <div class = "col-sm-offset-8 col-sm-2">
     <%= link_to 'Create my meal', new_meal_path, class: "btn btn-primary" %>
   </div>
  </div>
-  <div class= "row row-grid">
+<h2> <%= @meals.length %> meals proposed</h2>
+
+  <div class= "row">
     <% @meals.each do |meal| %>
     <div class="col-xs-12 col-sm-4">
       <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">

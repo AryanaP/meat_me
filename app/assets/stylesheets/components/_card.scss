@@ -8,6 +8,7 @@
   color: white;
   position: relative;
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 .card-user {
   position: absolute;
@@ -44,8 +45,4 @@
 }
 .card-link:hover{
   opacity: 0.1;
-}
-
-.row.row-grid [class*="col-"] + [class*="col-"] {
-    margin-top: 15px;
 }
