@@ -7,10 +7,10 @@ require 'faker'
     gender: ["Male", "Female"].sample,
     description: Faker::Lorem.sentence,
     email: Faker::Internet.email,
-    password: User.new(:password => password).encrypted_password,
+    password: "password",
     age: (18..70).to_a.sample,
     phone_number: Faker::PhoneNumber.phone_number,
-    host: false
+    host: true
     )
   user.save!
 end
@@ -28,4 +28,19 @@ end
     user_id: [1, 2, 3, 4, 5].sample
   )
   meal.save!
+end
+
+5.times do
+  user = User.new(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    gender: ["Male", "Female"].sample,
+    description: Faker::Lorem.sentence,
+    email: Faker::Internet.email,
+    password: "password",
+    age: (18..70).to_a.sample,
+    phone_number: Faker::PhoneNumber.phone_number,
+    host: false
+    )
+  user.save!
 end
