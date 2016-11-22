@@ -1,28 +1,24 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-6 col-xs-offset-3">
-      <h1>Edit your meal</h1>
-        <div class="container">
-          <div class="row">
-          <h2>Veuillez mettre à jour les informations, ci-dessous:</h2>
-          <div class="form-inputs">
-            <div class="col-sm-offset-4 col-sm-4"><%= simple_form_for(@meal) do |f| %>
-          <%= f.error_notification %>
-            <%= f.input :name %>
-            <%= f.input :address %>
-            <%= f.input :city %>
-            <%= f.input :date %>
-            <%= f.input :description %>
-            <%= f.input :food_type %>
-            <%= f.input :meeting_type %>
-            <%= f.input :photos, as: :attachinary %>
+  <h2>Veuillez mettre à jour les informations, ci-dessous:</h2>
+  <div class="form-inputs">
+    <div class="col-sm-offset-4 col-sm-4"><%= simple_form_for(@meal) do |f| %>
+  <%= f.error_notification %>
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.input :date %>
+    <%= f.input :description %>
+    <%= f.input :food_type %>
+    <%= f.input :meeting_type %>
+    <%= f.input :photos, as: :attachinary %>
 
-            <div class="form-actions">
-            <%= f.button :submit %>
-           </div>
-           <%= link_to 'Back', meals_path, class: "btn btn-primary" %>
-          <% end %>
-          </div>
+    <div class="form-actions">
+    <%= f.button :submit %>
+   </div>
+   <%= link_to 'Back', meals_path, class: "btn btn-primary" %>
+  <% end %>
+  </div>
     </div>
   </div>
 </div>
