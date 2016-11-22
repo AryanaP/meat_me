@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+   mount Attachinary::Engine => "/attachinary"
   root to: 'pages#home'
 
   devise_for :users,
@@ -7,4 +8,5 @@ Rails.application.routes.draw do
   resources :meals do
     resources :meetings, only: [ :create, :index, :update ]
   end
+
 end

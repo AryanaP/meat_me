@@ -1,22 +1,23 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Meals</h1>
-
- <% @meals.each do |meal| %>
- <ul class="list-unordered">
-   <li><%= meal.name %></li>
-   <li><%= meal.address %></li>
-   <li><%= meal.city %></li>
-   <li><%= meal.date %></li>
-   <li><%= meal.date %></li>
-   <li><%= meal.description %></li>
-   <li><%= meal.food_type %></li>
-   <li><%= meal.meeting_type %></li>
-   <li><%= link_to 'Show', meal %></li>
-   <li><%= link_to 'Edit', edit_meal_path(meal) %></li>
- </ul>
- <% end %>
-
-
-
-<%= link_to 'New meal', new_meal_path %>
+<div class="container card-container padded">
+  <h2><%= @meals.length %> meals proposed</h2>
+  <div class= "row">
+    <% @meals.each do |meal| %>
+    <div class="col-xs-12 col-sm-4">
+      <% if meal.photos? %>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path meal.photos.first.path, height: 175, width: 360, crop: :fill; %>');">
+        <% else %>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+      <% end %>
+        <div class="card-category"><%= meal.city %></div>
+        <div class="card-description">
+          <h2><%= meal.user.first_name %></h2>
+          <p><%= meal.name %></p>
+        </div>
+        <img class="card-user avatar avatar-large" src="http://placehold.it/30x30" />
+        <%= link_to "", meal_path(meal), class: "card-link" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

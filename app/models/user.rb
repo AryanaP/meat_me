@@ -8,11 +8,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   devise :omniauthable, omniauth_providers: [:facebook]
-  validates :first_name, presence:true
-  validates :last_name, presence:true
-  validates :gender, presence:true, inclusion: {in: ["Male", "Female"], message: "%{value} is not a valid gender" }
+  # validates :first_name, presence:true
+  # validates :last_name, presence:true
+  # validates :gender, presence:true, inclusion: {in: ["Male", "Female"], message: "%{value} is not a valid gender" }
   # validates :photo, presence:true
-  validates :description, presence:true
+  # validates :description, presence:true
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.to_h.slice(:provider, :uid)

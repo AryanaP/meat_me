@@ -1,16 +1,22 @@
 <h1>Your meal is:</h1>
-<br>
-<div class="align-right">
-  <ul class="list-unordered">
-    <li><%= @meal.name %></li>
-    <li><%= @meal.address %></li>
-    <li><%= @meal.city %></li>
-    <li><%= @meal.date %></li>
-    <li><%= @meal.description %></li>
-    <li><%= @meal.food_type %></li>
-    <li><%= @meal.meeting_type %></li>
-    <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
-
-    <%= button_to "Book", [@meal, :meetings] %>
-  </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+       <ul>
+        <li><%= @meal.name %></li>
+        <li><%= @meal.address %></li>
+        <li><%= @meal.city %></li>
+        <li><%= @meal.date %></li>
+        <li><%= @meal.description %></li>
+        <li><%= @meal.food_type %></li>
+        <li><%= @meal.meeting_type %></li>
+         <% @meal.photos.each do |photo| %>
+        <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+        <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
+        <% end %>
+        <%= button_to "Book", [@meal, :meetings] %>
+      </ul>
+    </div>
+  </div>
 </div>
+
