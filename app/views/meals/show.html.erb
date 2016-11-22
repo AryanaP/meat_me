@@ -14,9 +14,8 @@
         <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
         <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
         <% end %>
+        <%= button_to "Book", [@meal, :meetings] %>
       </ul>
     </div>
   </div>
 </div>
-
-
