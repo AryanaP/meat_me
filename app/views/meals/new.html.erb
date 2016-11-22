@@ -1,12 +1,15 @@
-<div class="container">
+<div class="container padded">
   <div class="row">
-    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
       <h1>Create a new meal</h1>
-
+      <p>Veuillez remplir les informations, ci-dessous, pour proposer votre soirée personnalisée:</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-4 col-sm-4">
       <%= simple_form_for(@meal) do |f| %>
         <%= f.error_notification %>
-
-        <div class="form-inputs">
+          <div class="form-inputs">
           <%= f.input :name %>
           <%= f.input :address %>
           <%= f.input :city, collection: ["Paris"] %>
@@ -14,17 +17,13 @@
           <%= f.input :description %>
           <%= f.input :food_type, collection: ["French", "Japanese", "Chinese", "Indian", "Italian"] %>
           <%= f.input :meeting_type, collection: ["Fun", "Professionnal", "Hot"] %>
-        </div>
-
-        <div class="form-actions">
-          <%= f.button :submit %>
-        </div>
+          <%= f.input :photos, as: :attachinary %>
+          <div class="form-actions">
+            <%= f.button :submit %>
+          </div>
+          <%= link_to 'Back', meals_path, class: "btn btn-primary" %>
       <% end %>
-      <%= link_to 'Back', meals_path %>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
