@@ -1,0 +1,38 @@
+
+<h1 class="text-center">My dates</h1>
+
+<div class="container">
+  <div class="row">
+  <% @guest_meetings.each do |meeting| %>
+    <div class="col-xs-12 col-sm-4">
+      <div class="card"><img src="https://www.placehold.it/300/300">
+        <div class="card-category">Guest</div>
+        <div class="card-description">
+          <h2><%= meeting.meal.name %></h2>
+          <h3>Organizer: <%= meeting.meal.user.first_name %> <%= meeting.meal.user.last_name %></h3>
+          <p>Status: <%= meeting.status %></p>
+          <p>Guest: <%= meeting.user.first_name %><%= meeting.user.last_name %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+  <% @host_meetings.each do |meeting| %>
+    <div class="col-xs-12 col-sm-4">
+      <div class="card"><img src="https://www.placehold.it/300/300">
+        <div class="card-category">Host</div>
+        <div class="card-description">
+          <h2><%= meeting.meal.name %></h2>
+          <h3>Organizer: <%= meeting.meal.user.first_name %> <%= meeting.meal.user.last_name %></h3>
+          <p>Status: <%= meeting.status %></p>
+          <p>Guest: <%= meeting.user.first_name %><%= meeting.user.last_name %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
