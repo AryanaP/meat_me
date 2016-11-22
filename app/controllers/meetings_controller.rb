@@ -11,7 +11,7 @@ class MeetingsController < ApplicationController
   def index
     # @meetings = Meeting.all
     @guest_meetings = Meeting.where(user_id: current_user.id)
-    @host_meetings = Meeting.host_meetings
+    @host_meetings = Meeting.joins(:meal => :user).where(:users => {:id => current_user.id})
     # Meeting.select('meetings.*').joins('meal': { meal_id: :id }).where(user_id: current_user.id)
     # Meeting.select("*").joins(:meal)
 
