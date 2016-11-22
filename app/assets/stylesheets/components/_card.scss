@@ -1,9 +1,13 @@
+.card-container{
+  color: $light-black;
+}
 .card {
   height: 175px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-size: cover !important;
   color: white;
   position: relative;
+  border-radius: 5px;
 }
 .card-user {
   position: absolute;

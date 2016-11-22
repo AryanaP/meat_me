@@ -36,21 +36,23 @@
   </div>
 </div>
 <!-- Cards code -->
-<div class="wrapper-grey">
-  <div class="container">
+<div class="wrapper-grey padded">
+  <div class="container card-container">
   <h2>Last meals proposed</h2>
     <div class="row">
+      <% @last_meals.each do |meal| %>
       <div class="col-xs-12 col-sm-4">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('images/burger.jpeg');">
-          <div class="card-category">Paris, France</div>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+          <div class="card-category"><%= meal.city %></div>
           <div class="card-description">
-            <h2>Seb</h2>
-            <p>Truly passionate about american culture and food</p>
+            <h2><%= meal.user.first_name %></h2>
+            <p><%= meal.description %></p>
           </div>
-          <img class="card-user avatar avatar-large" src="images/seb.jpg" />
-          <a class="card-link" href="profiles/seb.html">#</a>
+          <img class="card-user avatar avatar-large" src="http://placehold.it/30x30" />
+          <%= link_to "", meal_path(meal), class: "card-link" %>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
  </div>
