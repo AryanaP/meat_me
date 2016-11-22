@@ -1,5 +1,6 @@
 class MealsController < ApplicationController
   before_action :set_meal, only: [ :show, :edit, :update ]
+  skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
     @meals = Meal.all
@@ -16,31 +17,26 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal = Meal.new(meal_params)
-    @meal.user = current_user
-
-    respond_to do |format|
+      @meal = Meal.new(meal_params)
+      @meal.user = current_user
       if @meal.save
-        format.html { redirect_to @meal, notice: 'meal was successfully created.' }
-        format.json { render :show, status: :created, location: @meal }
+        flash[:notice] = 'meal was successfully created'
+        redirect_to meal_path(@meal)
       else
-        format.html { render :new }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
+        flash[:alert] = 'unprocessable_entity'
+        render :new
       end
     end
-  end
 
-    def update
-      respond_to do |format|
-        if @meal.update(meal_params)
-          format.html { redirect_to @meal, notice: 'meal was successfully updated.' }
-          format.json { render :show, status: :ok, location: @meal }
-        else
-          format.html { render :edit }
-          format.json { render json: @meal.errors, status: :unprocessable_entity }
-        end
+  def update
+      if @meal.update(meal_params)
+        flash[:notice] = 'meal was successfully updated'
+        redirect_to @meal
+      else
+        flash[:alert] = 'unprocessable_entity'
+        render :edit
       end
-    end
+  end
 
  private
 
