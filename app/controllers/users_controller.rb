@@ -1,13 +1,17 @@
 class UsersController < ApplicationController
-  # skip_before_action :authenticate_user!
-  # before_action :current_user, only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])
   end
 
   def edit
-    @user = current_user
+    # raise
+    if params[:id].to_i == current_user.id
+      @user = current_user
+    else
+      flash[:alert] = 'Nice try! - This is nor your profile...'
+      redirect_to :root
+    end
   end
 
   def update
@@ -24,8 +28,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :description, :age, :gender)
   end
-
-  # def current_user
-  #    @user = current_user
-  # end
 end
