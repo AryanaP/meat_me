@@ -9,17 +9,8 @@ class MeetingsController < ApplicationController
   end
 
   def index
-    # @meetings = Meeting.all
     @guest_meetings = Meeting.where(user_id: current_user.id)
-    @host_meetings = Meeting.host_meetings
-    # Meeting.select('meetings.*').joins('meal': { meal_id: :id }).where(user_id: current_user.id)
-    # Meeting.select("*").joins(:meal)
-
-# def top_five_artists(genre_name)
-#   Artist.select('artists.*, COUNT(tracks.name) AS track_count')
-#         .joins(albums: { tracks: :genre }).where(genres: { name: genre_name })
-#         .group('artists.name').order('track_count DESC').limit(5)
-# end
+    @host_meetings = Meeting.joins(:meal => :user).where(:users => {:id => current_user.id})
   end
 
 
