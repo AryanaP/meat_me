@@ -3,20 +3,20 @@
 
 <div class="container">
   <div class="row">
-  <% @host_meetings.each do |meeting| %>
+  <% @meetings.each do |meeting| %>
     <div class="col-xs-12 col-sm-4">
-      <div class="card"><%= cl_image_tag("#", width: 300, height: 180, crop: :fill) %>
+      <div class="card"><img src="https://www.placehold.it/300/300">
         <div class="card-category">Host</div>
         <div class="card-description">
-          <h2><%= meeting.meal.name %></h2>
+
           <ul class="list-inline">
-            <li><%= link_to 'Approve', approve_meeting_path(meeting), class: "btn btn-xs btn-primary" %></li>
-            <li><%= link_to 'Deny', deny_meeting_path(meeting), class: "btn btn-xs btn-primary" %></li>
+            <li><%= link_to 'Approve', "", class: "btn btn-xs btn-primary", id: "approve" %></li>
+            <li><%= link_to 'Deny', "", class: "btn btn-xs btn-primary" %></li>
           </ul>
         </div>
       </div>
     </div>
-    <% end %>
+  <% end %>
   </div>
 </div>
 
@@ -24,7 +24,7 @@
   <div class="row">
   <% @guest_meetings.each do |meeting| %>
     <div class="col-xs-12 col-sm-4">
-      <div class="card"><%= cl_image_tag("#", width: 300, height: 180, crop: :fill) %>
+      <div class="card"><img src="https://www.placehold.it/300/300">
         <div class="card-category">Host</div>
         <div class="card-description">
           <h2><%= meeting.meal.name %></h2>

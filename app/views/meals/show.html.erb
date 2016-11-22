@@ -9,4 +9,6 @@
   <li><%= @meal.food_type %></li>
   <li><%= @meal.meeting_type %></li>
   <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
+  <li><%= link_to "Book", meetings_path(@meal.id), method: :post %></li>
 </ul>
+
