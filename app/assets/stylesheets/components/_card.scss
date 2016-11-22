@@ -45,3 +45,7 @@
 .card-link:hover{
   opacity: 0.1;
 }
+
+.row.row-grid [class*="col-"] + [class*="col-"] {
+    margin-top: 15px;
+}

@@ -13,6 +13,11 @@ gem 'sass-rails'
 gem 'jquery-rails'
 gem 'uglifier'
 gem 'bootstrap-sass'
+gem "cloudinary", "1.1.0"
+gem "attachinary", github: "assembler/attachinary"
+gem "jquery-fileupload-rails"
+gem "coffee-rails"
+
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'simple_form_fancy_uploads'
