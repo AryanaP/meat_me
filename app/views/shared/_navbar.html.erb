@@ -1,7 +1,7 @@
-<div class="navbar-wagon navbar-fixed-top">
+<div class="navbar-wagon" id="navbar">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "logo.png" %>
+    <%= image_tag "burger_heart.png" %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -58,4 +58,21 @@
     </div>
   </div>
 </div>
+
+
+<% content_for(:js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var navbar = $("#navbar");
+      $(window).on("scroll", function(e) {
+      var scroll = $(window).scrollTop();
+        if (scroll > 200) {
+          navbar.addClass("navbar-fixed-top", 5000);
+        } else {
+          navbar.removeClass("navbar-fixed-top", 5000);
+        }
+      });
+    });
+  <% end %>
+<% end %>
 

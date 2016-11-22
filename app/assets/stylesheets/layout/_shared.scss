@@ -1,3 +1,16 @@
 .wrapper-grey {
     background: #F4F4F4;
 }
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin: 0 0 100px; /* bottom = footer height */
+}
+
+.simple_form_for {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
