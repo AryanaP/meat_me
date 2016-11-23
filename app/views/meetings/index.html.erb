@@ -11,6 +11,7 @@
           <h2><%= meeting.meal.name %></h2>
           <h3>Organizer: <%= meeting.meal.user.first_name %> <%= meeting.meal.user.last_name %></h3>
           <p>Guest: <%= meeting.user.first_name %><%= meeting.user.last_name %></p>
+          <p>Status: <%= meeting.status %></p>
         </div>
       </div>
     </div>
@@ -28,11 +29,12 @@
           <h2><%= meeting.meal.name %></h2>
           <h3>Organizer: <%= meeting.meal.user.email %> <%= meeting.meal.user.last_name %></h3>
           <h3>Guest: <%= meeting.user.email %> <%= meeting.user.last_name %></h3>
-          <%= button_to('Approved', 'meal_meeting(current_user)',
-          method: "patch", remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: "btn btn-success") %>
-          <%= button_to('Denied', ' meal_meeting(current_user)',
-          method: "patch", remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: "btn btn-danger") %>
-          <%= button_to("Approve", 'meal_meeting(:id)', method: :patch, params: { status: "Approved" }, class: "btn btn-success") %>
+          <p>Status: <%= meeting.status %></p>
+          <% if meeting.status == "Pending" %>
+            <%= button_to("Approve", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Approved" }, class: "btn btn-success") %>
+            <%= button_to("Deny", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Denied" }, class: "btn btn-danger") %>
+          <% else %>
+          <% end %>
           </div>
         </div>
       </div>

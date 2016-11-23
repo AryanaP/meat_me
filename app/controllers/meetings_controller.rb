@@ -13,11 +13,11 @@ class MeetingsController < ApplicationController
     @host_meetings = Meeting.joins(:meal => :user).where(:users => {:id => current_user.id})
   end
 
-
   def update
-    @host_meeting = Meeting.where(meeting_params)
-    @host_meeting.status = Meeting.find(params[:status])
-    render "meetings/index"
+    @host_meeting = Meeting.find(params[:id])
+    @host_meeting.status = params["status"]
+    @host_meeting.save
+    redirect_to meal_meetings_path
   end
 
   private
