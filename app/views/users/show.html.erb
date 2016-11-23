@@ -13,7 +13,7 @@
        <% if @user.photo? %>
         <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
         <% else %>
-         <%= image_tag "profil.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
+         <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
         <% end %>
         </div>
 
