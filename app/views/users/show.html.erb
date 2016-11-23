@@ -15,6 +15,7 @@
         <% else %>
          <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
         <% end %>
+        <%= link_to "Edit my profile", edit_user_path(current_user) %>
         </div>
 
       <!-- COL - TITRE + descr -->
