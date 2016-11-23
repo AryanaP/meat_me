@@ -2,7 +2,7 @@
  <div class="photo-container">
       <div class="banner-cover-img">
       <% @meal.photos.each do |photo| %>
-        <%= cl_image_tag photo.path, width: 1525, height: 402, crop: :fill %>
+        <div class= "swipebox"><%= cl_image_tag photo.path, width: 1525, height: 402, crop: :fill %></div>
       <% end %>
       </div>
   </div>
@@ -21,10 +21,10 @@
         <% else %>
          <%= image_tag "profil.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
         <% end %>
-        <h1><%= link_to "#{@user.first_name} #{@user.last_name}", user_path(@user) %></h1>
+        <h2><%= link_to "#{@user.first_name} #{@user.last_name}", user_path(@user) %></h2>
         <p><%= "Age : #{@user.age}" %></p>
         <p><%= "Gender : #{@user.gender}"%> </p>
-        <h2 class="text-center">More about me !</h2>
+        <h3 class="text-center">More about me !</h3>
         <p><%= @user.description %></p>
       </div>
 
@@ -39,7 +39,7 @@
               <li><%= @meal.date %></li>
               <li><%= @meal.food_type %></li>
               <li><%= @meal.meeting_type %></li>
-              <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
+              <%= link_to 'Edit', edit_meal_path(@meal) %>
             </ul>
           </div>
         </div>
