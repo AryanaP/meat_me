@@ -6,7 +6,7 @@ class MealsController < ApplicationController
     if params[:select] == "all"
       @meals = Meal.all
     else
-      @meals = Meal.where(food_type: params[:select])
+      @meals = Meal.where(food_type: "#{params[:select].capitalize}")
     end
   end
 
