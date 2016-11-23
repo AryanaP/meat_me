@@ -24,6 +24,7 @@ gem 'simple_form_fancy_uploads'
 gem 'autoprefixer-rails'
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'swipebox'
 
 
 # geocoding gems
