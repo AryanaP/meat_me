@@ -26,7 +26,11 @@
       <div class="row">
         <div class="col-xs-12  col-sm-6">
           <%= f.input :email %>
-      </div>
+        </div>
+        <div class="col-xs-12  col-sm-6">
+           <%= f.input :photo, as: :attachinary %>
+        </div>
+
     </div>
 
       <%= f.input :description, label_input: "About me", :input_html => {:rows => 10} %>
