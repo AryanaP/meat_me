@@ -6,19 +6,32 @@
             <div class="text-center banner-content">
               <h1>(m)eat-me</h1>
               <p>Love at first taste</p>
-              <form class="form-inline" action="/meals" method="GET">
-
-                <select name="select" class="form-control input-lg">
-                  <option value="" disabled selected>Select your type of food</option>
-                  <option value="all">All</option>
-                  <option value="french">French</option>
-                  <option value="japanese">Japanese</option>
-                  <option value="chinese">Chinese</option>
-                  <option value="indian">Indian</option>
-                  <option value="italian">Italian</option>
-                </select>
-                <input type="submit" class="btn btn-yours" value="(m)eat someone">
-              </form>
+              <div class="col-sm-12 hide-sm">
+                <div class="row">
+                    <form class="form-inline" action="/meals" method="GET">
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">I want to (m)eat </span>
+                        <select name="gender" class="form-control input-lg">
+                          <option value="whatever" selected>Whatever</option>
+                          <option value="female">Female</option>
+                          <option value="male">Man</option>
+                        </select>
+<!--                       </div>
+                      <div class="input-group"> -->
+                        <span class="input-group-addon" id="basic-addon1">and eat</span>
+                          <select name="food_type" class="form-control input-lg">
+                            <option value="all">anything</option>
+                            <option value="french">french</option>
+                            <option value="japanese">japanese</option>
+                            <option value="chinese">chinese</option>
+                            <option value="indian">indian</option>
+                            <option value="italian">italian</option>
+                          </select>
+                      </div>
+                      <input type="submit" class="btn btn-yours" value="(m)eat someone">
+                  </form>
+                </div>
+                </div>
             </div>
             </div>
           </div>
@@ -94,7 +107,7 @@
               navbar.addClass("navbar-wagon-transparent");
               $(window).on("scroll", function(e) {
               var scroll = $(window).scrollTop();
-                if (scroll > 200) {
+                if (scroll > 500) {
                   navbar_id.removeClass("navbar-block");
                   navbar.removeClass("navbar-wagon-transparent");
                   navbar.addClass("navbar-wagon");
