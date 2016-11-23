@@ -1,8 +1,35 @@
 <p id="notice"><%= notice %></p>
-<div class="container card-container padded">
-  <h2><%= @meals.length %> meals proposed</h2>
-  <div class= "row">
+<div class="container card-container padded text-center">
+  <h2><%= @meals.length %> meal(s) found for:</h2>
 
+  <div class= "row padded text-center">
+    <div class="col-xs-12">
+        <form class="form-inline" action="/meals" method="GET">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">I want to (m)eat </span>
+            <select name="gender" class="form-control input-lg">
+              <option value="whatever" selected><%= params[:gender]%></option>
+              <option value="whatever">anyone</option>
+              <option value="female">a woman</option>
+              <option value="male">a man</option>
+            </select>
+            <span class="input-group-addon" id="basic-addon1">and eat</span>
+              <select name="food_type" class="form-control input-lg">
+                <option value="all" selected><%= params[:food_type]%></option>
+                <option value="all">anything...</option>
+                <option value="french">french food</option>
+                <option value="japanese">japanese food</option>
+                <option value="chinese">chinese food</option>
+                <option value="indian">indian food</option>
+                <option value="italian">italian food</option>
+              </select>
+          </div>
+          <input type="submit" class="btn btn-yours" value="(m)eat someone">
+        </form>
+    </div>
+  </div>
+
+  <div class= "row">
     <div class="col-xs-12 col-sm-6">
       <div class="row">
 
@@ -45,6 +72,7 @@
             <% end %>
           <% end %>
       </div>
-
+    </div>
   </div>
+
 </div>
