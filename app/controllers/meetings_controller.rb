@@ -15,18 +15,9 @@ class MeetingsController < ApplicationController
 
 
   def update
-
-    def approve
-      @host_meeting = Meeting.where(meeting_params)
-      @host_meeting.status = "Approved"
-      render "meetings/index"
-    end
-
-    def deny
-      @host_meeting = Meeting.find(meeting_params)
-      @host_meeting.status = "Denied"
-      render "meetings/index"
-    end
+    @host_meeting = Meeting.where(meeting_params)
+    @host_meeting.status = Meeting.find(params[:status])
+    render "meetings/index"
   end
 
   private

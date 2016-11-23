@@ -28,8 +28,11 @@
           <h2><%= meeting.meal.name %></h2>
           <h3>Organizer: <%= meeting.meal.user.email %> <%= meeting.meal.user.last_name %></h3>
           <h3>Guest: <%= meeting.user.email %> <%= meeting.user.last_name %></h3>
-          <%= button_to('Destroy', 'meal_meeting(current_user)',
-          method: "patch", remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' }) %>
+          <%= button_to('Approved', 'meal_meeting(current_user)',
+          method: "patch", remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: "btn btn-success") %>
+          <%= button_to('Denied', ' meal_meeting(current_user)',
+          method: "patch", remote: true, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: "btn btn-danger") %>
+          <%= button_to("Approve", 'meal_meeting(meeting.id)', method: :patch, params: { status: "Approved" }, class: "btn btn-success") %>
           </div>
         </div>
       </div>
