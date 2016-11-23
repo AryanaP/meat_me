@@ -9,7 +9,8 @@
 
       <!-- COL -IMAGE -->
         <div class="col-xs-12 col-sm-6">
-          <img src="http://placehold.it/200x200" class="avatar-polaroid">
+          <!-- <img src="http://placehold.it/200x200" class="avatar-polaroid"> -->
+        <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
         </div>
 
       <!-- COL - TITRE + descr -->
