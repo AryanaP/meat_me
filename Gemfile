@@ -26,6 +26,15 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'swipebox'
 
+
+# geocoding gems
+gem "geocoder"
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
+
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
@@ -38,5 +47,4 @@ group :development, :test do
 
   gem 'faker'
 end
-
 

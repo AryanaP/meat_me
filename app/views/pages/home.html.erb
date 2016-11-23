@@ -6,15 +6,21 @@
             <div class="text-center banner-content">
               <h1>(m)eat-me</h1>
               <p>Love at first taste</p>
-              <form class="form-inline" action="#">
-                <input class="form-control input-lg" placeholder="type of food" type="text">
-                <input class="form-control input-lg" placeholder="personality tag" type="text">
-                <a class="btn btn-yours" href="#">(m)eat someone</a>
-              </form>
-              <%= link_to "All meals", meals_path, class: "btn btn-yours" %>
-            </div>
-            </div>
+              <form class="form-inline" action="/meals" method="GET">
 
+                <select name="select" class="form-control input-lg">
+                  <option value="" disabled selected>Select your type of food</option>
+                  <option value="all">All</option>
+                  <option value="french">French</option>
+                  <option value="japanese">Japanese</option>
+                  <option value="chinese">Chinese</option>
+                  <option value="indian">Indian</option>
+                  <option value="italian">Italian</option>
+                </select>
+                <input type="submit" class="btn btn-yours" value="(m)eat someone">
+              </form>
+            </div>
+            </div>
           </div>
         <video autoplay loop class="fillWidth">
             <source src="http://www.sciencestools.com/public/meat_me_video.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
@@ -49,50 +55,76 @@
     </div>
   </div>
 </div>
-<!-- Cards code -->
+<!-- Cards & Map code -->
 <div class="wrapper-grey padded">
   <div class="container card-container">
   <h2>Last meals proposed</h2>
-    <div class="row">
-      <% @last_meals.each do |meal| %>
-      <div class="col-xs-12 col-sm-4">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
-          <div class="card-category"><%= meal.city %></div>
-          <div class="card-description">
-            <h2><%= meal.user.first_name %></h2>
-            <p><%= meal.description %></p>
+
+  <div class="row">
+    <!-- CARDS     -->
+    <div class="col-xs-12 col-sm-6">
+      <div class="row">
+        <% @last_meals.each do |meal| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+            <div class="card-category"><%= meal.city %></div>
+            <div class="card-description">
+              <h2><%= meal.user.first_name %></h2>
+              <p><%= meal.description %></p>
+            </div>
+            <img class="card-user avatar avatar-large" src="http://placehold.it/30x30" />
+            <%= link_to "", meal_path(meal), class: "card-link" %>
           </div>
-          <img class="card-user avatar avatar-large" src="http://placehold.it/30x30" />
-          <%= link_to "", meal_path(meal), class: "card-link" %>
         </div>
+        <% end %>
       </div>
-      <% end %>
+    </div>
+
+    <!-- MAP -->
+    <div class="col-xs-12 col-sm-6">
+      <div id="map" style="width: 100%; height: 600px;"></div>
+        <% content_for(:after_js) do %>
+          <%= javascript_tag do %>
+            $(document).ready(function() {
+              var navbar = $(".navbar-wagon"),
+                navbar_id = $("#navbar");
+              navbar.removeClass("navbar-fixed-top", 5000);
+              navbar.removeClass("navbar-wagon");
+              navbar_id.addClass("navbar-block");
+              navbar.addClass("navbar-wagon-transparent");
+              $(window).on("scroll", function(e) {
+              var scroll = $(window).scrollTop();
+                if (scroll > 200) {
+                  navbar_id.removeClass("navbar-block");
+                  navbar.removeClass("navbar-wagon-transparent");
+                  navbar.addClass("navbar-wagon");
+                  navbar.addClass("navbar-fixed-top", 5000);
+                } else {
+                  navbar.removeClass("navbar-fixed-top", 5000);
+                  navbar.removeClass("navbar-wagon");
+                  navbar_id.addClass("navbar-block");
+                  navbar.addClass("navbar-wagon-transparent");
+                }
+              });
+              var handler = Gmaps.build('Google');
+              handler.buildMap({ internal: { id: 'map' } }, function() {
+                markers = handler.addMarkers(<%= raw @hash.to_json %>);
+                handler.bounds.extendWith(markers);
+                handler.fitMapToBounds();
+                if (markers.length == 0) {
+                  handler.getMap().setZoom(2);
+                } else if (markers.length == 1) {
+                  handler.getMap().setZoom(14);
+                }
+              });
+            });
+          <% end %>
+        <% end %>
     </div>
   </div>
+
+  </div>
  </div>
-<% content_for(:js) do %>
-  <%= javascript_tag do %>
-  $(document).ready(function() {
-  var navbar = $(".navbar-wagon"),
-    navbar_id = $("#navbar");
-  navbar.removeClass("navbar-fixed-top", 5000);
-  navbar.removeClass("navbar-wagon");
-  navbar_id.addClass("navbar-block");
-  navbar.addClass("navbar-wagon-transparent");
-  $(window).on("scroll", function(e) {
-  var scroll = $(window).scrollTop();
-    if (scroll > 200) {
-      navbar_id.removeClass("navbar-block");
-      navbar.removeClass("navbar-wagon-transparent");
-      navbar.addClass("navbar-wagon");
-      navbar.addClass("navbar-fixed-top", 5000);
-    } else {
-      navbar.removeClass("navbar-fixed-top", 5000);
-      navbar.removeClass("navbar-wagon");
-      navbar_id.addClass("navbar-block");
-      navbar.addClass("navbar-wagon-transparent");
-    }
-  });
-});
-  <% end %>
-<% end %>
+
+
+
