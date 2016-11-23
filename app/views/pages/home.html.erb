@@ -1,14 +1,28 @@
 <!-- Banner code -->
-<div class="banner-background" style="background-image: linear-gradient(-225deg, rgba(0,150,190,0.3) 0%, rgba(0,36,61,0.5) 50%), url('assets/banner.jpeg');">
-  <div class="text-center banner-content">
-    <h1>(m)eat-me</h1>
-    <p>Love at first taste</p>
-    <form class="form-inline" action="#">
-      <input class="form-control input-lg" placeholder="type of food" type="text">
-      <input class="form-control input-lg" placeholder="personality tag" type="text">
-      <a class="btn btn-yours" href="#">(m)eat someone</a>
-    </form>
-  </div>
+<div class="homepage-hero-module">
+    <div class="video-container">
+        <div class="filter">
+          <div class="banner">
+            <div class="text-center banner-content">
+              <h1>(m)eat-me</h1>
+              <p>Love at first taste</p>
+              <form class="form-inline" action="#">
+                <input class="form-control input-lg" placeholder="type of food" type="text">
+                <input class="form-control input-lg" placeholder="personality tag" type="text">
+                <a class="btn btn-yours" href="#">(m)eat someone</a>
+              </form>
+              <%= link_to "All meals", meals_path, class: "btn btn-yours" %>
+            </div>
+            </div>
+
+          </div>
+        <video autoplay loop class="fillWidth">
+            <source src="http://www.sciencestools.com/public/meat_me_video.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+        </video>
+        <div class="poster hidden">
+            <img src="http://sciencestools.com/public/Pour.jpg" alt="">
+        </div>
+    </div>
 </div>
 <!-- Features code -->
 <div class="container text-center padded features">

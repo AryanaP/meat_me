@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
       <h1>Create a new meal</h1>
-      <p>Veuillez remplir les informations, ci-dessous, pour proposer votre soirée personnalisée:</p>
+      <p>Please, filled the following informations:</p>
     </div>
   </div>
   <div class="row">
@@ -10,11 +10,11 @@
       <%= simple_form_for(@meal) do |f| %>
         <%= f.error_notification %>
           <div class="form-inputs">
-          <%= f.input :name %>
+          <%= f.input :name, label_input:"Please write a title for your meeting" %>
           <%= f.input :address %>
           <%= f.input :city, collection: ["Paris"] %>
           <%= f.input :date %>
-          <%= f.input :description %>
+          <%= f.input :description, label_input: "describe your meeting" %>
           <%= f.input :food_type, collection: ["French", "Japanese", "Chinese", "Indian", "Italian"] %>
           <%= f.input :meeting_type, collection: ["Fun", "Professionnal", "Hot"] %>
           <%= f.input :photos, as: :attachinary %>
