@@ -8,10 +8,6 @@ class MealsController < ApplicationController
 
   def show
     @user = User.find(@meal.user)
-<<<<<<< HEAD
-
-=======
->>>>>>> 3768c5555c353117d4fc647e6c4be2c3b4dbb4c2
   end
 
   def new

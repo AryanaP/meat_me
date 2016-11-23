@@ -15,15 +15,21 @@
   <!-- ROW Image + titre -->
     <div class="row">
     <!-- COL -POFILE -->
-      <div class="col-xs-12 col-sm-2">
+      <div class="col-xs-12 col-sm-3">
+      <% if @user.photo? %>
         <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
-        <p>"Age : " </p>
+        <% else %>
+         <%= image_tag "profil.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
+        <% end %>
+        <h1><%= link_to "#{@user.first_name} #{@user.last_name}", user_path(@user) %></h1>
+        <p><%= "Age : #{@user.age}" %></p>
+        <p><%= "Gender : #{@user.gender}"%> </p>
         <h2 class="text-center">More about me !</h2>
-        <p>description</p>
+        <p><%= @user.description %></p>
       </div>
 
       <!-- COL - TITRE + descr -->
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-6">
             <h2><%= @meal.name %></h2>
           <div class= "text-left">
              <ul>
