@@ -5,7 +5,7 @@ class MealsController < ApplicationController
   def index
     @meals = search(params[:gender], params[:food_type])
     @meals_map = @meals.where.not(latitude: nil, longitude: nil)
-    @hash = Gmaps4rails.build_markers(@meals) do |meal, marker|
+    @hash = Gmaps4rails.build_markers(@meals_map) do |meal, marker|
       marker.lat meal.latitude
       marker.lng meal.longitude
     end

@@ -18,7 +18,7 @@ end
 10.times do
   meal = Meal.new(
     name: Faker::App.name,
-    address: Faker::Address.street_address,
+    address: '16 villa gaudelet',
     city: "Paris",
     date: Faker::Date.forward(100),
     description: Faker::Lorem.sentence,
