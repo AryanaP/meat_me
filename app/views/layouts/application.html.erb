@@ -14,8 +14,16 @@
     <%= render 'shared/flashes' %>
     <%= yield %>
     <%= render 'shared/footer' %>
-    <%= javascript_include_tag 'application' %>
+<!--     <#%= javascript_include_tag 'application' %> il faut un seul JS include application - voir ou le mettre-->
     <%= cloudinary_js_config %>
     <%= yield(:js) %>
+
+<!-- JS NECESSAIRE AU FONCTIONNEMENT MAPS -->
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js" %>
+  <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
+  <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
+  <%= javascript_include_tag "application" %>
+  <%= yield(:after_js) %>
+
   </body>
 </html>

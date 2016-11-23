@@ -5,6 +5,9 @@
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
 //= require_tree .
+//= require underscore
+//= require gmaps/google
+
 
 $(document).ready(function() {
   $('.alert').delay(500).fadeIn('normal', function() {
