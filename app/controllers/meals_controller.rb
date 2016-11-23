@@ -14,6 +14,7 @@ class MealsController < ApplicationController
   end
 
   def show
+    @user = User.find(@meal.user)
   end
 
   def new
@@ -52,6 +53,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:name, :address, :city,  :date, :description, :food_type, :meeting_type, photos: [])
+    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :meeting_type, photos: [])
   end
 end

@@ -1,21 +1,58 @@
-<h1>Your meal is:</h1>
-<div class="container">
+
+ <div class="photo-container">
+      <div class="banner-cover-img">
+      <% @meal.photos.each do |photo| %>
+        <%= cl_image_tag photo.path, width: 1525, height: 402, crop: :fill %>
+      <% end %>
+      </div>
+  </div>
+
+<div class="page-container" >
   <div class="row">
-    <div class="col-xs-12 col-sm-4">
-       <ul>
-        <li><%= @meal.name %></li>
-        <li><%= @meal.address %></li>
-        <li><%= @meal.city %></li>
-        <li><%= @meal.date %></li>
-        <li><%= @meal.description %></li>
-        <li><%= @meal.food_type %></li>
-        <li><%= @meal.meeting_type %></li>
-         <% @meal.photos.each do |photo| %>
-        <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
-        <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
-        <% end %>
-        <%= button_to "Book", [@meal, :meetings] %>
-      </ul>
+    <!-- DIV PRINCIPALE CENTREE -->
+    <div class="col-xs-12 col-sm-offset-1 col-sm-11">
+
+  <!-- ROW Image + titre -->
+    <div class="row">
+    <!-- COL -POFILE -->
+      <div class="col-xs-12 col-sm-2">
+        <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
+        <p>"Age : " </p>
+        <h2 class="text-center">More about me !</h2>
+        <p>description</p>
+      </div>
+
+      <!-- COL - TITRE + descr -->
+        <div class="col-xs-12 col-sm-8">
+            <h2><%= @meal.name %></h2>
+          <div class= "text-left">
+             <ul>
+              <li><%= @meal.description %></li>
+              <li><%= @meal.address %></li>
+              <li><%= @meal.city %></li>
+              <li><%= @meal.date %></li>
+              <li><%= @meal.food_type %></li>
+              <li><%= @meal.meeting_type %></li>
+              <li><%= link_to 'Edit', edit_meal_path(@meal) %></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-1">
+          <div class= "text-center padded features">
+           <%= button_to "Book", [@meal, :meetings] %>
+          </div>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </div>
+
+
+
+
+
+
+
