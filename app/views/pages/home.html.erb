@@ -70,3 +70,29 @@
     </div>
   </div>
  </div>
+<% content_for(:js) do %>
+  <%= javascript_tag do %>
+  $(document).ready(function() {
+  var navbar = $(".navbar-wagon"),
+    navbar_id = $("#navbar");
+  navbar.removeClass("navbar-fixed-top", 5000);
+  navbar.removeClass("navbar-wagon");
+  navbar_id.addClass("navbar-block");
+  navbar.addClass("navbar-wagon-transparent");
+  $(window).on("scroll", function(e) {
+  var scroll = $(window).scrollTop();
+    if (scroll > 200) {
+      navbar_id.removeClass("navbar-block");
+      navbar.removeClass("navbar-wagon-transparent");
+      navbar.addClass("navbar-wagon");
+      navbar.addClass("navbar-fixed-top", 5000);
+    } else {
+      navbar.removeClass("navbar-fixed-top", 5000);
+      navbar.removeClass("navbar-wagon");
+      navbar_id.addClass("navbar-block");
+      navbar.addClass("navbar-wagon-transparent");
+    }
+  });
+});
+  <% end %>
+<% end %>
