@@ -6,19 +6,30 @@
             <div class="text-center banner-content">
               <h1>(m)eat-me</h1>
               <p>Love at first taste</p>
-              <form class="form-inline" action="/meals" method="GET">
-
-                <select name="select" class="form-control input-lg">
-                  <option value="" disabled selected>Select your type of food</option>
-                  <option value="all">All</option>
-                  <option value="french">French</option>
-                  <option value="japanese">Japanese</option>
-                  <option value="chinese">Chinese</option>
-                  <option value="indian">Indian</option>
-                  <option value="italian">Italian</option>
-                </select>
-                <input type="submit" class="btn btn-yours" value="(m)eat someone">
-              </form>
+              <div class="col-sm-12 hide-sm">
+                <div class="row">
+                    <form class="form-inline" action="/meals" method="GET">
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">I want to (m)eat </span>
+                        <select name="gender" class="form-control input-lg">
+                          <option value="whatever" selected>anyone</option>
+                          <option value="female">a woman</option>
+                          <option value="male">a man</option>
+                        </select>
+                        <span class="input-group-addon" id="basic-addon1">and eat</span>
+                          <select name="food_type" class="form-control input-lg">
+                            <option value="all">anything...</option>
+                            <option value="french">french food</option>
+                            <option value="japanese">japanese food</option>
+                            <option value="chinese">chinese food</option>
+                            <option value="indian">indian food</option>
+                            <option value="italian">italian food</option>
+                          </select>
+                      </div>
+                      <input type="submit" class="btn btn-yours" value="(m)eat someone">
+                  </form>
+                </div>
+                </div>
             </div>
             </div>
           </div>
@@ -61,19 +72,50 @@
   <h2>Last meals proposed</h2>
 
     <div class="row">
-          <% @last_meals.each do |meal| %>
-          <div class="col-xs-12 col-sm-4">
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
-              <div class="card-category"><%= meal.city %></div>
-              <div class="card-description">
-                <h2><%= meal.user.first_name %></h2>
-                <p><%= meal.description %></p>
-              </div>
-              <img class="card-user avatar avatar-large" src="http://placehold.it/30x30" />
-              <%= link_to "", meal_path(meal), class: "card-link" %>
+      <% @last_meals.each do |meal| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+            <div class="card-category"><%= meal.city %></div>
+            <div class="card-description">
+              <h2><%= meal.user.first_name %></h2>
+              <p><%= meal.description %></p>
             </div>
+            <img class="card-user avatar avatar-large" src="http://placehold.it/30x30" />
+            <%= link_to "", meal_path(meal), class: "card-link" %>
           </div>
-          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
+
+<!-- MAP -->
+<div class="col-xs-12 col-sm-6">
+  <div id="map" style="width: 100%; height: 600px;"></div>
+</div>
+
+<% content_for(:after_js) do %>
+  <% javascript_tag do %>
+    $(document).ready(function() {
+      var navbar = $(".navbar-wagon"),
+        navbar_id = $("#navbar");
+      navbar.removeClass("navbar-fixed-top", 5000);
+      navbar.removeClass("navbar-wagon");
+      navbar_id.addClass("navbar-block");
+      navbar.addClass("navbar-wagon-transparent");
+      $(window).on("scroll", function(e) {
+      var scroll = $(window).scrollTop();
+        if (scroll > 500) {
+          navbar_id.removeClass("navbar-block");
+          navbar.removeClass("navbar-wagon-transparent");
+          navbar.addClass("navbar-wagon");
+          navbar.addClass("navbar-fixed-top", 5000);
+        } else {
+          navbar.removeClass("navbar-fixed-top", 5000);
+          navbar.removeClass("navbar-wagon");
+          navbar_id.addClass("navbar-block");
+          navbar.addClass("navbar-wagon-transparent");
+        }
+      });
+  <% end %>
+<% end %>
