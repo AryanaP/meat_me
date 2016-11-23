@@ -88,12 +88,6 @@
     </div>
   </div>
 </div>
-
-<!-- MAP -->
-<div class="col-xs-12 col-sm-6">
-  <div id="map" style="width: 100%; height: 600px;"></div>
-</div>
-
 <% content_for(:after_js) do %>
   <% javascript_tag do %>
     $(document).ready(function() {
@@ -117,5 +111,6 @@
           navbar.addClass("navbar-wagon-transparent");
         }
       });
+    });
   <% end %>
 <% end %>
