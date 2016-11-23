@@ -3,7 +3,11 @@ class MealsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @meals = Meal.all
+    if params[:select] == "all"
+      @meals = Meal.all
+    else
+      @meals = Meal.where(food_type: params[:select])
+    end
   end
 
   def show
