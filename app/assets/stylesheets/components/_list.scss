@@ -1,0 +1,100 @@
+.meeting {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+}
+
+.meeting h4 {
+  text-decoration: none;
+}
+
+/* Body design */
+.meeting-body {
+  flex: 1 1 auto;
+}
+.meeting-body h3 {
+  font-weight: bold;
+  font-size: 23px;
+  margin-top: 0;
+}
+
+.small {
+  width: 10%;
+}
+
+.medium {
+  width: 20%;
+}
+
+.mdlarge {
+  width: 35%;
+}
+
+.mdlarge > p {
+  margin: 0px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #999999;
+}
+
+h4 {
+  text-decoration: underline;
+  margin: 10px;
+}
+
+.meeting-body p {
+  font-weight: lighter;
+  color: #999999;
+  margin-bottom: 0;
+}
+
+/* meeting image */
+.meeting-image {
+  border-radius: 10px;
+  margin-right: 20px;
+  width: 175px;
+}
+
+.meeting-status {
+  padding-right: 20px;
+  text-align: center;
+  transition: all 0.15s ease;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 20px;
+}
+.status {
+  margin: 2px 0 0;
+}
+
+/* Controls design */
+.meeting-controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0px;
+}
+.meeting-controls a {
+  padding: 0 20px;
+  font-size: 17px;
+  color: #E6E6E6;
+}
+.meeting-controls a:hover {
+  color: #D3473C !important
+}
+.meeting-controls-hidden a {
+  color: transparent;
+  font-size: 15px;
+  transition: all 0.15s ease;
+  border-color: transparent;
+}
+
+/* Hover effects */
+.meeting:hover {
+  background: #f7f7fa;
+  cursor: pointer;
+}
+
+.meeting:hover .meeting-controls-hidden a { color: #E6E6E6 }
