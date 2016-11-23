@@ -8,6 +8,12 @@ class MealsController < ApplicationController
     else
       @meals = Meal.where(food_type: "#{params[:select].capitalize}")
     end
+
+    @meals_map = @meals.where.not(latitude: nil, longitude: nil)
+    @hash = Gmaps4rails.build_markers(@meals) do |meal, marker|
+      marker.lat meal.latitude
+      marker.lng meal.longitude
+    end
   end
 
   def show

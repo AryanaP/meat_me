@@ -25,6 +25,15 @@ gem 'autoprefixer-rails'
 gem 'devise'
 gem 'omniauth-facebook'
 
+
+# geocoding gems
+gem "geocoder"
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
+
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
@@ -37,5 +46,4 @@ group :development, :test do
 
   gem 'faker'
 end
-
 
