@@ -3,12 +3,7 @@ class MealsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    if params[:select] == "all"
-      @meals = Meal.all
-    else
-      @meals = Meal.where(food_type: "#{params[:select].capitalize}")
-    end
-
+    @meals = search(params[:gender], params[:food_type])
     @meals_map = @meals.where.not(latitude: nil, longitude: nil)
     @hash = Gmaps4rails.build_markers(@meals) do |meal, marker|
       marker.lat meal.latitude
@@ -57,5 +52,19 @@ class MealsController < ApplicationController
 
   def meal_params
     params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :meeting_type, photos: [])
+  end
+
+  def search(gender, food_type)
+    if food_type.nil?
+      Meal.all
+    elsif gender == "whatever" && food_type == "all"
+      Meal.all
+    elsif gender != "whatever" && food_type == "all"
+      Meal.joins(:user).where(:users => {:gender => "#{gender.capitalize}"})
+    elsif gender == "whatever" && food_type != "all"
+      Meal.where(food_type: "#{params[:food_type].capitalize}")
+    else
+      Meal.joins(:user).where(food_type: "#{food_type.capitalize}", :users => {:gender => "#{gender.capitalize}"})
+    end
   end
 end
