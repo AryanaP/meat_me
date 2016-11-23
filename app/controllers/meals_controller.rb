@@ -3,14 +3,16 @@ class MealsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    if params[:select] == "all"
-      @meals = Meal.all
+    @meals = Meal.all
+    if params[:select] && params[:select] != "all"
+      @meals = @meals.where(food_type: "#{params[:select].capitalize}")
     else
-      @meals = Meal.where(food_type: "#{params[:select].capitalize}")
+      flash[:alert] = "Il faut choisir une catégorie"
+      redirect_to root_path
     end
 
     @meals_map = @meals.where.not(latitude: nil, longitude: nil)
-    @hash = Gmaps4rails.build_markers(@meals) do |meal, marker|
+    @hash = Gmaps4rails.build_markers(@meals_map) do |meal, marker|
       marker.lat meal.latitude
       marker.lng meal.longitude
     end
