@@ -12,8 +12,8 @@
               <p>Status: <%= meeting.status %></p>
               <% if meeting.status == "Pending" %>
                 <i class="fa fa-question" aria-hidden="true"></i>
-                <%= button_to("Approve", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Approved" }, class: "btn btn-success") %>
-                <%= button_to("Deny", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Denied" }, class: "btn btn-danger") %>
+                <%= button_to("Approve", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Approved" }, class: "btn btn-success btn-xs") %>
+                <%= button_to("Deny", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Denied" }, class: "btn btn-danger btn-xs") %>
               <% elsif meeting.status == "Approved" %>
                 <i class="fa fa-check" aria-hidden="true"></i>
               <% else %>
@@ -23,7 +23,7 @@
           </div>
           <div class="img-meeting item medium">
             <% if meeting.meal.photos? %>
-              <%= cl_image_tag meeting.meal.photos, height: 150, width: 100, crop:fill %>
+              <%= cl_image_tag meeting.meal.photos.first.path, height: 100, width: 150, crop: :fill  %>
             <% else %>
               <%= image_tag("plate.jpeg", size: "150x100", alt: "plate")%>
             <% end %>
@@ -58,7 +58,7 @@
           </div>
           <div class="img-meeting item medium">
             <% if meeting.meal.photos? %>
-              <%= cl_image_tag meeting.meal.photos, height: 150, width: 100, crop:fill %>
+              <%= cl_image_tag meeting.meal.photos.first.path, height: 100, width: 150, crop: :fill %>
             <% else %>
               <%= image_tag("plate.jpeg", size: "150x100", alt: "plate")%>
               <% end %>
