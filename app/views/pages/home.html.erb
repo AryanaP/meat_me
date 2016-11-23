@@ -6,15 +6,21 @@
             <div class="text-center banner-content">
               <h1>(m)eat-me</h1>
               <p>Love at first taste</p>
-              <form class="form-inline" action="#">
-                <input class="form-control input-lg" placeholder="type of food" type="text">
-                <input class="form-control input-lg" placeholder="personality tag" type="text">
-                <a class="btn btn-yours" href="#">(m)eat someone</a>
+              <form class="form-inline" action="/meals" method="GET">
+                <select name="select" class="form-control input-lg">
+                  <option value="" disabled selected>Select your type of food</option>
+                  <option value="all">All</option>
+                  <option value="french">French</option>
+                  <option value="japanese">Japanese</option>
+                  <option value="chinese">Chinese</option>
+                  <option value="indian">Indian</option>
+                  <option value="italian">Italian</option>
+                </select>
+                <input type="submit" class="btn btn-yours" value="(m)eat someone">
               </form>
               <%= link_to "All meals", meals_path, class: "btn btn-yours" %>
             </div>
             </div>
-
           </div>
         <video autoplay loop class="fillWidth">
             <source src="http://www.sciencestools.com/public/meat_me_video.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
