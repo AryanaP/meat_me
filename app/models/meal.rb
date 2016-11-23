@@ -1,5 +1,7 @@
 class Meal < ApplicationRecord
   belongs_to :user
+  has_many :meetings
+
   has_attachments :photos, maximum: 5
   validates :name, presence: true
   validates :address, presence: true

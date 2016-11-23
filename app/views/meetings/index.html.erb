@@ -10,7 +10,6 @@
         <div class="card-description">
           <h2><%= meeting.meal.name %></h2>
           <h3>Organizer: <%= meeting.meal.user.first_name %> <%= meeting.meal.user.last_name %></h3>
-          <p>Status: <%= meeting.status %></p>
           <p>Guest: <%= meeting.user.first_name %><%= meeting.user.last_name %></p>
         </div>
       </div>
@@ -27,9 +26,8 @@
         <div class="card-category">Host</div>
         <div class="card-description">
           <h2><%= meeting.meal.name %></h2>
-          <h3>Organizer: <%= meeting.meal.user.first_name %> <%= meeting.meal.user.last_name %></h3>
-          <p>Status: <%= meeting.status %></p>
-          <p>Guest: <%= meeting.user.first_name %><%= meeting.user.last_name %></p>
+          <h3>Organizer: <%= meeting.meal.user.email %> <%= meeting.meal.user.last_name %></h3>
+          <h3>Guest: <%= meeting.user.email %> <%= meeting.user.last_name %></h3>
         </div>
       </div>
     </div>
