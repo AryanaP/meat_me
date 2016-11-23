@@ -13,20 +13,11 @@ class MeetingsController < ApplicationController
     @host_meetings = Meeting.joins(:meal => :user).where(:users => {:id => current_user.id})
   end
 
-
   def update
-
-    def approve
-      @host_meeting = Meeting.where(meeting_params)
-      @host_meeting.status = "Approved"
-      render "meetings/index"
-    end
-
-    def deny
-      @host_meeting = Meeting.find(meeting_params)
-      @host_meeting.status = "Denied"
-      render "meetings/index"
-    end
+    @host_meeting = Meeting.find(params[:id])
+    @host_meeting.status = params["status"]
+    @host_meeting.save
+    redirect_to meal_meetings_path
   end
 
   private
