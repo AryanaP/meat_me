@@ -24,7 +24,6 @@ gem 'autoprefixer-rails'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'bootstrap-social-rails'
-gem 'swipebox'
 
 
 # geocoding gems
@@ -33,6 +32,7 @@ gem "gmaps4rails"
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
+  gem "rails-assets-swipebox"
 end
 
 group :development, :test do

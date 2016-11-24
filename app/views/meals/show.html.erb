@@ -1,12 +1,16 @@
-<div class="photo-container">
-  <div class="banner-cover-img">
-    <% if @meal.photos? %>
-      <div class= "swipebox"><%= cl_image_tag @meal.photos.first.path, width: 1525, height: 400, crop: :fill %></div>
-    <% else %>
-      <div class= "swipebox"><%= image_tag "empty-plate.jpg" %></div>
-    <% end %>
-  </div>
+
+<div class="banner-cover-img">
+  <% if @meal.photos? %>
+    <div>
+      <%= link_to image_url ('cl_image_tag @meal.photos.last.path'), class: "swipebox" do %>
+       <% cl_image_tag @meal.photos.last.path, width: 1525, height: 400, crop: :fill %>
+      <% end %>
+    </div>
+  <% else %>
+    <div> <%= image_tag "empty-plate.jpg" %></div>
+  <% end %>
 </div>
+
 
 <div class="container meal-container">
   <div class="row" >
@@ -69,29 +73,39 @@
         <div class="meal-map">
           <h3>Dinner location</h3>
             <div id="map" style="width: 80%; height: 500px;"></div>
-              <% content_for(:after_js) do %>
-                <%= javascript_tag do %>
-                  $(document).ready(function() {
-                    var handler = Gmaps.build('Google');
-                    handler.buildMap({ internal: { id: 'map' } }, function() {
-                      markers = handler.addMarkers(<%= raw @hash.to_json %>);
-                      handler.bounds.extendWith(markers);
-                      handler.fitMapToBounds();
-                      if (markers.length == 0) {
-                        handler.getMap().setZoom(2);
-                      } else if (markers.length == 1) {
-                        handler.getMap().setZoom(14);
-                      }
-                    });
-                  });
-                <% end %>
-              <% end %>
         </div>
       </div>
   </div>
 </div>
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var mealBookBox = $(".meal-book-box");
+      $(window).on("scroll", function(e) {
+        var divHeight = $(".meal-container").height() + 350 - $(".meal-book-box").height();
+        var scroll = $(window).scrollTop();
+        if (scroll > divHeight) {
+          mealBookBox.removeClass("meal-book-box-fixed", 5000);
+        } else if (scroll > 450) {
+          mealBookBox.addClass("meal-book-box-fixed", 5000);
+        } else {
+          mealBookBox.removeClass("meal-book-box-fixed", 5000);
+        }
+      });
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(14);
+        }
+      });
 
-
-
+    });
+  <% end %>
+<% end %>
 
 
