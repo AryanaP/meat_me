@@ -8,8 +8,15 @@ class MealsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@meals_map) do |meal, marker|
       marker.lat meal.latitude
       marker.lng meal.longitude
+      marker.infowindow render_to_string(partial: "/meals/info_window", locals: { meal: meal })
     end
   end
+
+
+  def gmaps4rails_infowindow
+      puts "this is a test"
+  end
+
 
   def show
     @user = User.find(@meal.user)

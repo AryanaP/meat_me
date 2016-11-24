@@ -1,47 +1,84 @@
-<div class="container">
-  <h1 class="text-center">My dates</h1>
+<h1 class="text-center">My dates</h1>
   <br>
+<div class="tabs">
+  <a class="tab active" data-target="#host">
+    <h3>Host</h3>
+    <p><%= @my_meals.count %> dates</p>
+  </a>
+  <a class="tab" data-target="#guest">
+    <h3>Guest</h3>
+    <p><%= @guest_meetings.count %> dates</p>
+  </a>
+</div>
+<br>
+
+<div class="container tab-content" id="host">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-
-      <h4>Dates as a host</h4>
-      <% @host_meetings.each do |meeting| %>
-        <div class="meeting">
-          <div class="meeting-status item small">
-            <div class="status">
-              <p>Status: <%= meeting.status %></p>
-              <% if meeting.status == "Pending" %>
-                <i class="fa fa-question" aria-hidden="true"></i>
-                <%= button_to("Approve", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Approved" }, class: "btn btn-success btn-xs") %>
-                <%= button_to("Deny", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Denied" }, class: "btn btn-danger btn-xs") %>
-              <% elsif meeting.status == "Approved" %>
-                <i class="fa fa-check" aria-hidden="true"></i>
-              <% else %>
-                <i class="fa fa-times" aria-hidden="true"></i>
+      <% @my_meals.each do |my_meal| %>
+      <div class="meeting">
+        <div class="img-meeting item medium">
+          <% if my_meal.photos? %>
+            <%= cl_image_tag meal.photos.first.path, height: 100, width: 150, crop: :fill  %>
+          <% else %>
+            <%= image_tag("plate.jpeg", size: "150x100", alt: "plate")%>
+          <% end %>
+        </div>
+        <div class='meeting-body item mdlarge'>
+          <h4><%= my_meal.name.capitalize %></h4>
+          <p><%= my_meal.description %></p>
+        </div>
+        <div class="participants item mdlarge">
+          <p>Organizer: <%= my_meal.user.first_name %> <%= my_meal.user.last_name %></p>
+          <p><%= my_meal.user.email %></p>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-sm-11 col-sm-offset-1">
+            <% @host_meetings.each do |meeting| %>
+              <% if meeting.meal_id == my_meal.id %>
+                <div class="meeting">
+                  <div class="img-meeting item medium text-center">
+                    <% if meeting.user.photo? %>
+                      <%= cl_image_tag meeting.user.photo.path, height: 100, width: 150, crop: :fill  %>
+                    <% else %>
+                      <%= image_tag("default_profile.jpeg", size: "150x100", alt: "plate", class: "avatar-large")%>
+                    <% end %>
+                    <h4><%= meeting.user.first_name %> <%= meeting.user.last_name %></h4>
+                  </div>
+                  <div class='meeting-body item mdlarge text-justify'>
+                    <p><%= meeting.user.description %></p>
+                  </div>
+                  <div class="meeting-status item md text-center">
+                    <div class="status">
+                      <p>Status: <%= meeting.status %></p>
+                      <% if meeting.status == "Pending" %>
+                        <i class="fa fa-question" aria-hidden="true"></i>
+                        <ul class="list-unstyled">
+                          <li><%= button_to("Approve", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Approved" }, class: "btn btn-success") %></li>
+                          <li><%= button_to("Deny", meal_meeting_path(current_user, meeting), method: :patch, params: { status: "Denied" }, class: "btn btn-danger") %></li>
+                        </ul>
+                      <% elsif meeting.status == "Approved" %>
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      <% else %>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
               <% end %>
-            </div>
-          </div>
-          <div class="img-meeting item medium">
-            <% if meeting.meal.photos? %>
-              <%= cl_image_tag meeting.meal.photos.first.path, height: 100, width: 150, crop: :fill  %>
-            <% else %>
-              <%= image_tag("plate.jpeg", size: "150x100", alt: "plate")%>
             <% end %>
-          </div>
-          <div class='meeting-body item mdlarge'>
-            <h4><%= meeting.meal.name.capitalize %></h4>
-            <p><%= meeting.meal.description %></p>
-          </div>
-          <div class="participants item mdlarge">
-              <p>Organizer: <%= meeting.meal.user.email %><%= meeting.meal.user.last_name %></p>
-              <p>Guest: <%= meeting.user.email %> <%= meeting.user.last_name %></p>
           </div>
         </div>
       <% end %>
+    </div>
+  </div>
+</div>
+<br>
 
-      <br>
-
-      <h4>Dates as a guest</h4>
+<div class="container tab-content hidden" id="guest">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
       <% @guest_meetings.each do |meeting| %>
         <div class="meeting">
           <div class="meeting-status item small">
@@ -76,6 +113,20 @@
     </div>
   </div>
 </div>
-<br>
+</br>
 
+<% content_for(:after_js) do %>
+  <% javascript_tag do %>
+    $(function(){
+
+    $(".tab").on("click", function(e){
+      $(".tab").removeClass('active');
+      $(this).addClass('active');
+      $(".tab-content").addClass('hidden');
+      $($(this).data('target')).removeClass('hidden');
+    });
+
+  });
+  <% end %>
+<% end %>
 
