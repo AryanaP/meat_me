@@ -48,6 +48,7 @@ h4 {
   font-weight: lighter;
   color: #999999;
   margin-bottom: 0;
+  padding: 10px;
 }
 
 /* meeting image */
@@ -67,6 +68,13 @@ h4 {
 }
 .status {
   margin: 2px 0 0;
+}
+
+.status .btn {
+  width: 80px;
+  margin-top: 2px;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
 /* Controls design */
