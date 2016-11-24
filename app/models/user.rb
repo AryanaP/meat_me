@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :meals, dependent: :destroy
   has_attachment :photo
-  has_many :meetings, through: :mealsrev
+  has_many :meetings, through: :meals
   has_many :meetings
   has_many :reviews
 
