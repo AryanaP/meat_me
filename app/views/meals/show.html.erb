@@ -29,7 +29,9 @@
              <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-large img-circle"%>
           <% end %>
           <p><%= link_to @user.first_name, user_path(@user) %></p>
-          <i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i>
+          <% @user.reviews.average(:star).to_i.times do %>
+            <i class="fa fa-star" style="color: #ffb400"></i>
+          <% end %>
         </div>
       </div>
       <hr>
