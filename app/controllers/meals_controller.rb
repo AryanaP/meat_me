@@ -20,6 +20,13 @@ class MealsController < ApplicationController
 
   def show
     @user = User.find(@meal.user)
+    if !@meal.latitude.nil? & !@meal.longitude.nil?
+      @hash = Gmaps4rails.build_markers(@meal) do |meal, marker|
+      marker.lat meal.latitude
+      marker.lng meal.longitude
+      marker.infowindow render_to_string(partial: "/meals/info_window", locals: { meal: meal })
+      end
+    end
   end
 
   def new
@@ -58,7 +65,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :meeting_type, photos: [])
+    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :price, :meeting_type, photos: [])
   end
 
   def search(gender, food_type)
