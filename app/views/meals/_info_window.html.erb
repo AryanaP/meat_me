@@ -1,0 +1,11 @@
+
+<div class="info-window">
+  <h3><%= meal.name %></h3>
+<!--   <p> <#%= meal.date %></p> -->
+
+  <% if meal.photos? %>
+      <%= cl_image_tag meal.photos.first.path, width: 80, crop: :fill %></div>
+  <% else %>
+      <%= image_tag "empty-plate.jpg", width: 80, crop: :fill %>
+  <% end %>
+</div>
