@@ -1,37 +1,40 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-      <div class="user-photo text-center">
-       <% if @user.photo? %>
-          <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
-        <% else %>
-          <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
-        <% end %>
-        <p><%= @user.first_name %></p>
-        <% if user_signed_in? && current_user == @user %>
-          <%= link_to "Edit my profile", edit_user_path(current_user) %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-      <div class="user-information text-center">
-          <h1><%= "#{@user.first_name} #{@user.last_name}"%> </h1>
-          <p>Age: <%= @user.age %></p>
-          <p>Gender: <%= @user.gender %></p>
-           <p>Description: <%= @user.description %></p>
+  <div class="col-xs-12 col-sm-6">
+    <div class="row">
+      <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <div class="row">
+          <div class="user-photo text-center">
+           <% if @user.photo? %>
+              <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
+            <% else %>
+              <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
+            <% end %>
+            <p><%= @user.first_name %></p>
+            <% if user_signed_in? && current_user == @user %>
+              <%= link_to "Edit my profile", edit_user_path(current_user) %>
+            <% end %>
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+          <div class="user-information text-center">
+              <h1><%= "#{@user.first_name} #{@user.last_name}"%> </h1>
+              <p>Age: <%= @user.age %></p>
+              <p>Gender: <%= @user.gender %></p>
+               <p class="text-justify" id="user-description">Description: <%= @user.description %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <h2>Reviews</h2>
+            <% @user.reviews.each do |review| %>
+              <% review.star.to_i.times do %>
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+                <%= review.content %>
+              <% end%>
+             <% end %>
     </div>
   </div>
-
-  <h2>Reviews</h2>
-      <% @user.reviews.each do |review| %>
-        <% review.star.to_i.times do %>
-        <i class="fa fa-star-o" aria-hidden="true"></i>
-        - <%= review.content %>
-        <% end%>
-       <% end %>
-</div>
