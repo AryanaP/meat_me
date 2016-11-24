@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Add a review for <%= "#{@user.first_name} #{@user.last_name}"%></h1>
+  <%= simple_form_for [@user, @review] do |f|  %>
+    <%= f.input :content %>
+    <%= f.input :star, collection: [1,2,3,4,5]%>
+    <%= f.submit 'add' %>
+  <% end %>
+  <% if @review.errors.any? %>
+    <%= @review.errors.full_messages %>
+  <% end %>
+</div>
