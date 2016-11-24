@@ -28,9 +28,10 @@
   </div>
 
   <h2>Reviews</h2>
-    <ul>
       <% @user.reviews.each do |review| %>
-        <li><i class="fa fa-star-o" aria-hidden="true"><%= review.star %> - <%= review.content %></li>
+        <% review.star.to_i.times do %>
+        <i class="fa fa-star-o" aria-hidden="true"></i>
+        - <%= review.content %>
+        <% end%>
        <% end %>
-   </ul>
 </div>
