@@ -16,6 +16,7 @@ class User < ApplicationRecord
   # validates :gender, presence:true, inclusion: {in: ["Male", "Female"], message: "%{value} is not a valid gender" }
   # validates :photo, presence:true
   # validates :description, presence:true
+  validates :email, presence:true
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.to_h.slice(:provider, :uid)
