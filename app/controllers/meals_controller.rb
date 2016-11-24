@@ -65,7 +65,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :meeting_type, photos: [])
+    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :price, :meeting_type, photos: [])
   end
 
   def search(gender, food_type)

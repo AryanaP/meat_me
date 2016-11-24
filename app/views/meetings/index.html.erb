@@ -25,7 +25,7 @@
           <% end %>
         </div>
         <div class='meeting-body item mdlarge'>
-          <h4><%= my_meal.name.capitalize %></h4>
+          <h4><%= my_meal.name.capitalize %> <%= my_meal.date.strftime('%d/%m/%Y') %>></h4>
           <p><%= my_meal.description %></p>
         </div>
         <div class="participants item mdlarge">

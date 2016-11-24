@@ -14,6 +14,7 @@
           <%= f.input :address, id:"meal_address" %>
           <%= f.input :city, collection: ["Paris"], id:"meal_city" %>
           <%= f.input :date %>
+          <%= f.input :price, label_input:"Price in €", input_html: {value: f.object.price || '1'} %>
           <%= f.input :description, label_input: "describe your meeting" %>
           <%= f.input :food_type, collection: ["French", "Japanese", "Chinese", "Indian", "Italian"] %>
           <%= f.input :meeting_type, collection: ["Fun", "Professionnal", "Hot"] %>
