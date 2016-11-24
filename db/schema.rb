@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123101155) do
+ActiveRecord::Schema.define(version: 20161124095417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 20161123101155) do
     t.index ["user_id"], name: "index_meetings_on_user_id", using: :btree
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "star"
+    t.integer  "user_id"
+    t.integer  "meeting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_reviews_on_meeting_id", using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -90,4 +101,6 @@ ActiveRecord::Schema.define(version: 20161123101155) do
   add_foreign_key "meals", "users"
   add_foreign_key "meetings", "meals"
   add_foreign_key "meetings", "users"
+  add_foreign_key "reviews", "meetings"
+  add_foreign_key "reviews", "users"
 end
