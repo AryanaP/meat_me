@@ -20,6 +20,13 @@ class MealsController < ApplicationController
 
   def show
     @user = User.find(@meal.user)
+    if !@meal.latitude.nil? & !@meal.longitude.nil?
+      @hash = Gmaps4rails.build_markers(@meal) do |meal, marker|
+      marker.lat meal.latitude
+      marker.lng meal.longitude
+      marker.infowindow render_to_string(partial: "/meals/info_window", locals: { meal: meal })
+      end
+    end
   end
 
   def new
