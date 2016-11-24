@@ -1,0 +1,55 @@
+.header-flat-details {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-meal-presentation h1 {
+  font-weight: bold;
+}
+
+.header-meal-host {
+  padding: 0 15px 0 15px;
+}
+
+.meal-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: $gray;
+}
+
+.meal-icons i {
+  font-size: 30px;
+}
+
+.meal-map {
+  margin-bottom: 30px;
+}
+
+.meal-book-box {
+  margin-top: 25px;
+  border: 1px solid #dce0e0;
+  padding: 20px;
+  z-index:50;
+}
+
+.meal-book-box-fixed {
+  position: fixed;
+  top: 20px;
+  width: 360px;
+  background-color: white;
+  margin-top: 50px;
+}
+
+.meal-book-box-bottom {
+  position: absolute;
+  padding-top: 40px;
+  width: 360px;
+}
+
+.btn-booking {
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+}

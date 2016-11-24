@@ -1,64 +1,96 @@
-
- <div class="photo-container">
-      <div class="banner-cover-img">
-      <% @meal.photos.each do |photo| %>
-        <div class= "swipebox"><%= cl_image_tag photo.path, width: 1525, height: 402, crop: :fill %></div>
-      <% end %>
-      </div>
-  </div>
-
-<div class="page-container" >
-  <div class="row">
-    <!-- DIV PRINCIPALE CENTREE -->
-    <div class="col-xs-12 col-sm-offset-1 col-sm-11">
-
-  <!-- ROW Image + titre -->
-    <div class="row">
-    <!-- COL -POFILE -->
-      <div class="col-xs-12 col-sm-3">
-      <% if @user.photo? %>
-        <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
-        <% else %>
-         <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
-        <% end %>
-        <h2><%= link_to "#{@user.first_name} #{@user.last_name}", user_path(@user) %></h2>
-        <p><%= "Age : #{@user.age}" %></p>
-        <p><%= "Gender : #{@user.gender}"%> </p>
-        <h3 class="text-center">More about me !</h3>
-        <p><%= @user.description %></p>
-      </div>
-
-      <!-- COL - TITRE + descr -->
-        <div class="col-xs-12 col-sm-6">
-            <h2><%= @meal.name %></h2>
-          <div class= "text-left">
-             <ul>
-              <li><%= @meal.description %></li>
-              <li><%= @meal.address %></li>
-              <li><%= @meal.city %></li>
-              <li><%= @meal.date %></li>
-              <li><%= @meal.food_type %></li>
-              <li><%= @meal.meeting_type %></li>
-              <%= link_to 'Edit', edit_meal_path(@meal) %>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-1">
-          <div class= "text-center padded features">
-           <%= button_to "Book", [@meal, :meetings] %>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
+<div class="photo-container">
+  <div class="banner-cover-img">
+    <% if @meal.photos? %>
+      <div class= "swipebox"><%= cl_image_tag @meal.photos.first.path, width: 1525, height: 400, crop: :fill %></div>
+    <% else %>
+      <div class= "swipebox"><%= image_tag "empty-plate.jpg" %></div>
+    <% end %>
   </div>
 </div>
 
-
-
-
+<div class="container meal-container">
+  <div class="row" >
+    <!-- DIV PRINCIPALE CENTREE -->
+    <div class="col-xs-12 col-sm-6 col-sm-offset-1">
+      <div class="header-flat-details">
+        <div class="header-meal-presentation">
+          <h1><%= @meal.name %></h1>
+          <p><%= @meal.city %></p>
+          <% if user_signed_in? && current_user.id == @meal.user.id %>
+            <%= link_to 'Edit', edit_meal_path(@meal) %>
+          <% end %>
+        </div>
+        <div class="header-meal-host text-center">
+          <% if @user.photo? %>
+            <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-large img-circle" %>
+          <% else %>
+             <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-large img-circle"%>
+          <% end %>
+          <p><%= link_to @user.first_name, user_path(@user) %></p>
+          <i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i><i class="fa fa-star" style="color: #ffb400"></i>
+        </div>
+      </div>
+      <hr>
+      <div class="meal-icons">
+        <div class="text-center">
+          <i class="fa fa-cutlery" aria-hidden="true"></i><br>
+          <%= @meal.food_type %>
+        </div>
+        <div class="text-center">
+          <i class="fa fa-fire" aria-hidden="true"></i><br>
+          <%= @meal.meeting_type %>
+        </div>
+        <div class="text-center">
+          <i class="fa fa-bed" aria-hidden="true"></i><br>
+          <p>1 Bed</p>
+        </div>
+      </div>
+      <hr>
+      <div class="meal-description">
+        <h3>More about the dinner</h3>
+        <p><%= @meal.description %></p>
+      </div>
+      <div class="host-description">
+        <h3>More about <%= @user.first_name %></h3>
+        <p><%= @user.description %></p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="meal-book-box">
+          <h3>Book this dinner</h3>
+          <%= button_to "Book", [@meal, :meetings], class: "btn btn-primary btn-booking", style: "width: 100%" %>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+        <div class="meal-map">
+          <h3>Dinner location</h3>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6518878737193!2d2.3776593515937656!3d48.864848179186396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66df010ec3bff%3A0x5c6f6f48943f3b48!2s16+Villa+Gaudelet%2C+75011+Paris!5e0!3m2!1sen!2sfr!4v1479936460661" width="100%" height="450px" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      </div>
+  </div>
+</div>
+<% content_for(:after_js) do %>
+  <% javascript_tag do %>
+  $(document).ready(function() {
+    var mealBookBox = $(".meal-book-box");
+    $(window).on("scroll", function(e) {
+      var divHeight = $(".meal-container").height() + 350 - $(".meal-book-box").height();
+      var scroll = $(window).scrollTop();
+      if (scroll > divHeight) {
+        mealBookBox.removeClass("meal-book-box-fixed", 5000);
+      } else if (scroll > 450) {
+        mealBookBox.addClass("meal-book-box-fixed", 5000);
+      } else {
+        mealBookBox.removeClass("meal-book-box-fixed", 5000);
+      }
+    });
+  });
+  <% end %>
+<% end %>
 
 
 
