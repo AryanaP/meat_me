@@ -11,6 +11,8 @@ class MeetingsController < ApplicationController
   def index
     @guest_meetings = Meeting.where(user_id: current_user.id)
     @host_meetings = Meeting.joins(:meal => :user).where(:users => {:id => current_user.id})
+    @my_meals = current_user.meals
+    @my_meetings = @guest_meetings
   end
 
   def update
