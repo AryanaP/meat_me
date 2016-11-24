@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-xs-12 col-sm-6">
     <div class="row">
-      <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+      <div class="col-xs-12">
         <div class="row">
           <div class="user-photo text-center">
            <% if @user.photo? %>
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <div class="col-xs-12">
           <div class="user-information text-center">
               <h1><%= "#{@user.first_name} #{@user.last_name}"%> </h1>
               <p>Age: <%= @user.age %></p>
@@ -28,13 +28,21 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-6">
-        <h2>Reviews</h2>
-            <% @user.reviews.each do |review| %>
-              <% review.star.to_i.times do %>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <%= review.content %>
-              <% end%>
-             <% end %>
+      <div class="col-xs-12 col-sm-6 text-center profile-info">
+        <div id="wrapper">
+          <h2>Reviews</h2>
+            <% if @user.reviews.count != 0 %>
+              <% @user.reviews.each do |review| %>
+                <% review.star.to_i.times do %>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                  <%= review.content %>
+                <% end%>
+               <% end %>
+            <% else %>
+              <p style="color: red"><%= @user.first_name %> <%= @user.last_name %> has no review yet</p>
+            <% end %>
+        </div>
+      </div>
     </div>
   </div>
+</div>
