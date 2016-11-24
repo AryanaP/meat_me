@@ -3,7 +3,7 @@ class MealsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @meals = search(params[:gender], params[:food_type])
+    @meals = search(params[:gender], params[:food_type]).paginate(:page => params[:page], :per_page => 20).order('id DESC')
     @meals_map = @meals.where.not(latitude: nil, longitude: nil)
     @hash = Gmaps4rails.build_markers(@meals_map) do |meal, marker|
       marker.lat meal.latitude
@@ -65,7 +65,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :meeting_type, photos: [])
+    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :price, :meeting_type, photos: [])
   end
 
   def search(gender, food_type)

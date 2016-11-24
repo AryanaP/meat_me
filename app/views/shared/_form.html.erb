@@ -19,8 +19,7 @@
           <%= f.input :age, required: true %>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <%= f.input :gender, required: true,  collection: [ [1, "Male"], [2, "Female"] ], label_method: :last,
-          value_method: :first, as: :radio_buttons, checked: true %>
+          <%= f.input :gender, required: true,  collection: [ ["Male", "Male"], ["Female", "Female"] ], label_method: :last, value_method: :first, as: :radio_buttons %>
         </div>
       </div>
 

@@ -1,78 +1,87 @@
 <p id="notice"><%= notice %></p>
-<div class="container card-container padded text-center">
-  <h2><%= @meals.length %> meal(s) found for:</h2>
-
-  <div class= "row padded text-center">
-    <div class="col-xs-12">
-        <form class="form-inline" action="/meals" method="GET">
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">I want to (m)eat </span>
-            <select name="gender" class="form-control input-lg">
-              <option value="whatever" selected><%= params[:gender]%></option>
-              <option value="whatever">anyone</option>
-              <option value="female">a woman</option>
-              <option value="male">a man</option>
+<div class="search">
+  <div class="search-sidebar">
+    <div class="search-box">
+      <h3><%= @meals.length %> meal(s) found for:</h3>
+      <form class="form-inline" action="/meals" method="GET">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">I want to (m)eat </span>
+          <select name="gender" class="form-control input-lg">
+            <option value="whatever" selected><%= params[:gender]%></option>
+            <option value="whatever">anyone</option>
+            <option value="female">a woman</option>
+            <option value="male">a man</option>
+          </select>
+          <span class="input-group-addon" id="basic-addon1">and eat</span>
+            <select name="food_type" class="form-control input-lg">
+              <option value="all" selected><%= params[:food_type]%></option>
+              <option value="all">anything...</option>
+              <option value="french">french food</option>
+              <option value="japanese">japanese food</option>
+              <option value="chinese">chinese food</option>
+              <option value="indian">indian food</option>
+              <option value="italian">italian food</option>
             </select>
-            <span class="input-group-addon" id="basic-addon1">and eat</span>
-              <select name="food_type" class="form-control input-lg">
-                <option value="all" selected><%= params[:food_type]%></option>
-                <option value="all">anything...</option>
-                <option value="french">french food</option>
-                <option value="japanese">japanese food</option>
-                <option value="chinese">chinese food</option>
-                <option value="indian">indian food</option>
-                <option value="italian">italian food</option>
-              </select>
-          </div>
-          <input type="submit" class="btn btn-yours" value="(m)eat someone">
-        </form>
+        </div>
+        <input type="submit" class="btn btn-yours" value="(m)eat someone">
+      </form>
     </div>
-  </div>
-
-  <div class= "row">
-    <div class="col-xs-12 col-sm-6">
-      <div class="row">
-
-        <% @meals.each do |meal| %>
-        <div class="col-xs-12 col-sm-6">
-          <% if meal.photos? %>
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path meal.photos.first.path, height: 175, width: 360, crop: :fill; %>');">
-            <% else %>
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
-          <% end %>
-            <div class="card-category"><%= meal.city %></div>
-            <div class="card-description">
-              <h2><%= meal.user.first_name %></h2>
-              <p><%= meal.name %></p>
+    <div class="search-results">
+      <div class= "row">
+        <div class="col-xs-12">
+          <div class="row">
+            <% @meals.each do |meal| %>
+            <div class="listing-card-wrapper col-sm-12 col-md-6 space-4">
+              <% if meal.photos? %>
+                <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path meal.photos.first.path, height: 175, width: 360, crop: :fill; %>');">
+                <% else %>
+                <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+              <% end %>
+                <div class="card-category"><%= meal.city %></div>
+                <div class="card-description">
+                  <h2><%= meal.user.first_name %></h2>
+                  <p><%= meal.name %></p>
+                </div>
+                 <% if meal.user.photo? %>
+                    <%= cl_image_tag meal.user.photo.path, height: 30, width: 30, crop: :fill, gravity: :face, class: "card-user avatar" %>
+                  <% else %>
+                    <%= image_tag "default_profile.jpg", class: "card-user avatar" %>
+                  <% end %>
+                <%= link_to "", meal_path(meal), class: "card-link" %>
+                </div>
+                </div>
+            <% end %>
             </div>
-            <img class="card-user avatar avatar-large" src="http://placehold.it/30x30" />
-            <%= link_to "", meal_path(meal), class: "card-link" %>
+          </div>
+          <div class="search-pagination">
+            <div class="pagination-info">
+              <%= page_entries_info @posts %>
             </div>
-            </div>
-        <% end %>
+            <%= will_paginate @posts, :container => false %>
+          </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-6">
-        <div id="map" style="width: 100%; height: 600px;"></div>
-          <% content_for(:after_js) do %>
-            <%= javascript_tag do %>
-              $(document).ready(function() {
-                var handler = Gmaps.build('Google');
-                handler.buildMap({ internal: { id: 'map' } }, function() {
-                  markers = handler.addMarkers(<%= raw @hash.to_json %>);
-                  handler.bounds.extendWith(markers);
-                  handler.fitMapToBounds();
-                  if (markers.length == 0) {
-                    handler.getMap().setZoom(2);
-                  } else if (markers.length == 1) {
-                    handler.getMap().setZoom(14);
-                  }
-                });
-              });
-            <% end %>
-          <% end %>
-      </div>
-    </div>
   </div>
-
+  <div class="search-map">
+    <div id="map" style="width: 100%; height: 100%;"></div>
+    </div>
 </div>
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      $('#footer').css('display', 'none');
+      $('html, body').css({overflow: 'hidden',height: '100%'});
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(14);
+        }
+      });
+    });
+  <% end %>
+<% end %>
