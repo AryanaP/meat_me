@@ -11,8 +11,8 @@
         <%= f.error_notification %>
           <div class="form-inputs">
           <%= f.input :name, label_input:"Please write a title for your meeting" %>
-          <%= f.input :address %>
-          <%= f.input :city, collection: ["Paris"] %>
+          <%= f.input :address, id:"meal_address" %>
+          <%= f.input :city, collection: ["Paris"], id:"meal_city" %>
           <%= f.input :date %>
           <%= f.input :description, label_input: "describe your meeting" %>
           <%= f.input :food_type, collection: ["French", "Japanese", "Chinese", "Indian", "Italian"] %>
@@ -27,3 +27,4 @@
     </div>
   </div>
 </div>
+
