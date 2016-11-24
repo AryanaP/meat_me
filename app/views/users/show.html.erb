@@ -1,55 +1,29 @@
-<div class="page-container" >
+<div class="container">
   <div class="row">
-    <!-- DIV PRINCIPALE CENTREE -->
     <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-
-
-  <!-- ROW Image + titre -->
-      <div class="row">
-
-      <!-- COL -IMAGE -->
-        <div class="col-xs-12 col-sm-6">
-          <!-- <img src="http://placehold.it/200x200" class="avatar-polaroid"> -->
+      <div class="user-photo text-center">
        <% if @user.photo? %>
-        <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
+          <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
         <% else %>
-         <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
+          <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
         <% end %>
-        <%= link_to "Edit my profile", edit_user_path(current_user) %>
-        </div>
-
-      <!-- COL - TITRE + descr -->
-        <div class="col-xs-12 col-sm-6">
-        <!-- ROW TITRE -->
-          <div class="row">
-            <div class="col-xs-12">
-              <h1><%= "#{@user.first_name} #{@user.last_name}"%> </h1>
-            </div>
+        <p><%= @user.first_name %></p>
+        <% if user_signed_in? && current_user == @user %>
+          <%= link_to "Edit my profile", edit_user_path(current_user) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+      <div class="user-information text-center">
+          <h1><%= "#{@user.first_name} #{@user.last_name}"%> </h1>
+          <p>Age: <%= @user.age %></p>
+          <p>Gender: <%= @user.gender %></p>
+           <p>Description: <%= @user.description %></p>
           </div>
-        <!-- ROW more -->
-          <div class="row">
-            <div class="col-xs-12">
-              <p><%= "Age : #{@user.age}" %></p>
-              <p><%= "Gender : #{@user.gender}"%> </p>
-            </div>
-          </div>
-        <!-- ROW descr -->
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="show-description">
-                </br>
-                <h2 class="text-center">More about me !</h2>
-                <p><%= @user.description %></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>
-
-
