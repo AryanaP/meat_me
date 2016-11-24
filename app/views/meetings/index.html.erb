@@ -107,6 +107,7 @@
           <div class="participants item mdlarge">
             <p>Organizer: <%= meeting.meal.user.first_name %> <%= meeting.meal.user.last_name %></p>
             <p>Guest: <%= meeting.user.email %> <%= meeting.user.last_name %></p>
+            <%= button_to "Review this person", [meeting, new_meal_meeting_review_path], class: "btn btn-info" %>
           </div>
         </div>
       <% end %>
