@@ -25,6 +25,8 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'bootstrap-social-rails'
 gem 'swipebox'
+gem 'will_paginate'
+
 
 
 # geocoding gems
