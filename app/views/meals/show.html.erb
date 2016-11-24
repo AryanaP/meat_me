@@ -1,12 +1,16 @@
-<div class="photo-container">
-  <div class="banner-cover-img">
-    <% if @meal.photos? %>
-      <div class= "swipebox"><%= cl_image_tag @meal.photos.first.path, width: 1525, height: 400, crop: :fill %></div>
-    <% else %>
-      <div class= "swipebox"><%= image_tag "empty-plate.jpg" %></div>
-    <% end %>
-  </div>
+
+<div class="banner-cover-img">
+  <% if @meal.photos? %>
+    <div>
+      <%= link_to image_url ('cl_image_tag @meal.photos.last.path'), class: "swipebox" do %>
+       <% cl_image_tag @meal.photos.last.path, width: 1525, height: 400, crop: :fill %>
+      <% end %>
+    </div>
+  <% else %>
+    <div> <%= image_tag "empty-plate.jpg" %></div>
+  <% end %>
 </div>
+
 
 <div class="container meal-container">
   <div class="row" >
@@ -74,23 +78,29 @@
   </div>
 </div>
 <% content_for(:after_js) do %>
-  <% javascript_tag do %>
-  $(document).ready(function() {
-    var mealBookBox = $(".meal-book-box");
-    $(window).on("scroll", function(e) {
-      var divHeight = $(".meal-container").height() + 350 - $(".meal-book-box").height();
-      var scroll = $(window).scrollTop();
-      if (scroll > divHeight) {
-        mealBookBox.removeClass("meal-book-box-fixed", 5000);
-      } else if (scroll > 450) {
-        mealBookBox.addClass("meal-book-box-fixed", 5000);
-      } else {
-        mealBookBox.removeClass("meal-book-box-fixed", 5000);
-      }
+  <script>
+    $(document).ready(function() {
+      var mealBookBox = $(".meal-book-box");
+      $(window).on("scroll", function(e) {
+        var divHeight = $(".meal-container").height() + 350 - $(".meal-book-box").height();
+        var scroll = $(window).scrollTop();
+        if (scroll > divHeight) {
+          mealBookBox.removeClass("meal-book-box-fixed", 5000);
+        } else if (scroll > 450) {
+          mealBookBox.addClass("meal-book-box-fixed", 5000);
+        } else {
+          mealBookBox.removeClass("meal-book-box-fixed", 5000);
+        }
+      });
+      // $( '#gallery' ).click( function( e ) {
+      //   e.preventDefault();
+      //   $.swipebox( [
+      //     { href:'https://static.pexels.com/photos/214238/pexels-photo-214238.jpeg', title:'My Caption' },
+      //     { href:'https://static.pexels.com/photos/214238/pexels-photo-214238.jpeg', title:'My Second Caption' }
+      //   ] );
+      // } );
     });
-  });
-  <% end %>
+  </script>
 <% end %>
-
 
 
