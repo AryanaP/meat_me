@@ -19,7 +19,7 @@
       <div class="meeting">
         <div class="img-meeting item medium">
           <% if my_meal.photos? %>
-            <%= cl_image_tag meal.photos.first.path, height: 100, width: 150, crop: :fill  %>
+            <%= cl_image_tag my_meal.photos.first.path, height: 100, width: 150, crop: :fill  %>
           <% else %>
             <%= image_tag("plate.jpeg", size: "150x100", alt: "plate")%>
           <% end %>
