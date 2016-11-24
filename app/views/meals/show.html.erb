@@ -2,9 +2,7 @@
 <div class="banner-cover-img">
   <% if @meal.photos? %>
     <div>
-      <%= link_to image_url ('cl_image_tag @meal.photos.last.path'), class: "swipebox" do %>
-       <% cl_image_tag @meal.photos.last.path, width: 1525, height: 400, crop: :fill %>
-      <% end %>
+      <%= cl_image_tag @meal.photos.first.path, width: 1525, height: 400, crop: :fill %>
     </div>
   <% else %>
     <div> <%= image_tag "empty-plate.jpg" %></div>

@@ -22,6 +22,6 @@ class ReviewsController < ApplicationController
     end
 
     def set_user
-      @user = User.find(params[:user_id])
+      @user = User.find(params[:user_id, :meeting_id])
     end
   end
