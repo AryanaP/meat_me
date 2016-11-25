@@ -103,7 +103,7 @@
               <% end %>
           </div>
           <div class='meeting-body item mdlarge'>
-            <h4><%= meeting.meal.name %></h4>
+          <h4><%= link_to meeting.meal.name, meal_path(meeting.meal) %> </h4>
             <span><i class="fa fa-calendar" aria-hidden="true"></i> <%= meeting.meal.date.strftime('%a %d %b %Y') %> </span>
             <p><%= meeting.meal.description %></p>
           </div>
