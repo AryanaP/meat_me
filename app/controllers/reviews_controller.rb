@@ -9,20 +9,27 @@ class ReviewsController < ApplicationController
     end
 
     def create
-      @review = Review.new(content: params["review"][:content], star: params["review"][:star], meeting_id: params[:meeting_id], user_id: Meeting.find(params[:meeting_id]).meal.user.id)
+      @review = Review.new(content: params["review"][:content],
+        star: params["review"][:star],
+        meeting_id: params[:meeting_id])
+        if current_user.id == Meeting.find(params[:meeting_id]).user_id
+          @review.user_id = Meeting.find(params[:meeting_id]).meal.user.id
+        else
+          @review.user_id = Meeting.find(params[:meeting_id]).user_id
+        end
+      @review.reviewer = current_user.id
       @user = Meal.find(params[:meal_id]).user
       if @review.save
         redirect_to user_path(@user)
       else
-        # Bug ici
-        render :new
+          render :new
       end
     end
 
     private
 
     def review_params
-      params.require(:review).permit(:content, :star)
+      params.require(:review).permit(:content, :star, :reviewer, :user_id)
     end
 
     # def set_user
