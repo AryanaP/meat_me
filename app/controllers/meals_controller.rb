@@ -19,12 +19,12 @@ class MealsController < ApplicationController
 
 
   def show
-    @user = User.find(@meal.user)
-    if !@meal.latitude.nil? & !@meal.longitude.nil?
-      @hash = Gmaps4rails.build_markers(@meal) do |meal, marker|
-      marker.lat meal.latitude
-      marker.lng meal.longitude
-      marker.infowindow render_to_string(partial: "/meals/info_window", locals: { meal: meal })
+    @user = @meal.user
+    if !@meal.latitude.nil? && !@meal.longitude.nil?
+      @hash = Gmaps4rails.build_markers([@meal]) do |meal, marker|
+        marker.lat meal.latitude
+        marker.lng meal.longitude
+        marker.infowindow render_to_string(partial: "/meals/info_window", locals: { meal: meal })
       end
     end
   end
@@ -37,16 +37,16 @@ class MealsController < ApplicationController
   end
 
   def create
-      @meal = Meal.new(meal_params)
-      @meal.user = current_user
-      if @meal.save
-        flash[:notice] = 'meal was successfully created'
-        redirect_to meal_path(@meal)
-      else
-        flash[:alert] = 'unprocessable_entity'
-        render :new
-      end
+    @meal = Meal.new(meal_params)
+    @meal.user = current_user
+    if @meal.save
+      flash[:notice] = 'meal was successfully created'
+      redirect_to meal_path(@meal)
+    else
+      flash[:alert] = 'unprocessable_entity'
+      render :new
     end
+  end
 
   def update
       if @meal.update(meal_params)
@@ -65,7 +65,7 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :price, :meeting_type, photos: [])
+    params.require(:meal).permit(:user_id, :name, :address, :city,  :date, :description, :food_type, :price, :meeting_type, :latitude, :longitude, photos: [])
   end
 
   def search(gender, food_type)

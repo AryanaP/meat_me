@@ -14,7 +14,7 @@ class Meal < ApplicationRecord
   validates :meeting_type, presence: true
   validates :date, presence: true
 
-  validate :expiration_date_cannot_be_in_the_past
+  # validate :expiration_date_cannot_be_in_the_past
 
   def expiration_date_cannot_be_in_the_past
     if date < Date.today
