@@ -1,37 +1,97 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-      <div class="user-photo text-center">
-       <% if @user.photo? %>
-          <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
-        <% else %>
-          <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
-        <% end %>
-        <p><%= @user.first_name %></p>
-        <% if user_signed_in? && current_user == @user %>
-          <%= link_to "Edit my profile", edit_user_path(current_user) %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-      <div class="user-information text-center">
-          <h1><%= "#{@user.first_name} #{@user.last_name}"%> </h1>
-          <p>Age: <%= @user.age %></p>
-          <p>Gender: <%= @user.gender %></p>
-           <p>Description: <%= @user.description %></p>
+  <div class="col-xs-12 col-sm-6">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="user-photo text-center">
+           <% if @user.photo? %>
+              <%= cl_image_tag @user.photo.path, width: 300, height: 300, crop: :fill, class:"avatar-polaroid" %>
+            <% else %>
+              <%= image_tag "default_profile.jpg", width: 300, height: 300, crop: :fill, class:"avatar-polaroid"%>
+            <% end %><br><br>
+            <% @user.reviews.average(:star).to_i.times do %>
+              <i class="fa fa-star" style="color: #ffb400"></i>
+            <% end %><br><br>
+            <% if user_signed_in? && current_user == @user %>
+              <em><%= link_to "Edit my profile", edit_user_path(current_user) %></em>
+            <% end %>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <h2>Reviews</h2>
-      <% @user.reviews.each do |review| %>
-        <% review.star.to_i.times do %>
-        <i class="fa fa-star-o" aria-hidden="true"></i>
-        - <%= review.content %>
-        <% end%>
-       <% end %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="user-information text-center">
+              <h1><%= "#{@user.first_name} #{@user.last_name}"%> </h1>
+              <p>Age: <%= @user.age %></p>
+              <p>Gender: <%= @user.gender %></p>
+               <p class="text-justify" id="user-description">Description: <%= @user.description %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 profile-info">
+        <div class="row">
+        <h2 class="text-center">Reviews</h2>
+        <% if @user.reviews.count != 0 %>
+          <% @user.reviews.each do |review| %>
+            <div class="col-sm-12">
+              <div class="meeting">
+                <div class="meeting-status">
+                  <div class="status col-xs-3">
+                    <% writer = User.find(review.reviewer) %>
+                    <% if writer.photo? %>
+                      <%= cl_image_tag writer.photo.path, height: 50, width: 75, crop: :fill  %>
+                    <% else %>
+                      <%= image_tag("default_profile.jpeg", size: "75x50", alt: "profile", class: "avatar")%>
+                    <% end %>
+                    <h4><%= writer.first_name %> <%= writer.last_name %></h4>
+                    </div>
+                  <div class="img-meeting col-xs-4">
+                    <% review.star.to_i.times do %>
+                      <i class="fa fa-star" style="color: #ffb400"></i>
+                    <% end%>
+                  </div>
+                  <div class='meeting-body col-xs-5'>
+                    <p><%= review.content %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="col-sm-12">
+            <p style="color: red"><%= @user.first_name %> <%= @user.last_name %> has no review yet</p>
+          </div>
+        <% end %>
+        </div>
+        <div class="col-sm-12">
+          <div class="row">
+            <h2 class="text-center">Meals</h2>
+            <br>
+            <% if @user.meals.count != 0 %>
+              <% @user.meals.each do |meal| %>
+                <div class="listing-card-wrapper col-sm-6">
+                  <% if meal.photos? %>
+                    <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path meal.photos.first.path, height: 175, width: 360, crop: :fill; %>');">
+                  <% else %>
+                    <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://lewagon.github.io/ui-components/images/card-background.jpeg');">
+                  <% end %>
+                    <div class="card-category"><%= meal.city %></div>
+                    <div class="card-description">
+                      <h2><%= meal.user.first_name %></h2>
+                      <p><%= meal.name %></p>
+                      <%= link_to "", meal_path(meal), class: "card-link" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <p style="color: red"><%= @user.first_name %> <%= @user.last_name %> has no meal yet</p>
+            </div>
+          </div>
+        <% end %>
+        </div>
+      </div>
 </div>
+
