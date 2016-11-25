@@ -107,7 +107,9 @@
           <div class="participants item mdlarge">
             <p>Organizer: <%= meeting.meal.user.first_name %> <%= meeting.meal.user.last_name %></p>
             <p>Guest: <%= meeting.user.email %> <%= meeting.user.last_name %></p>
-            <%= link_to "Review this person", new_meal_meeting_review_path(:meeting_id => meeting.id), class: "btn btn-info" %>
+              <% if meeting.status == "Approved" && Review.where(meeting_id: meeting.id, reviewer: current_user.id).count == 0 %>
+              <%= link_to "Review this person", new_meal_meeting_review_path(:meeting_id => meeting.id), class: "btn btn-info" %>
+            <% end %>
           </div>
         </div>
       <% end %>
