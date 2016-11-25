@@ -37,3 +37,29 @@
 .search-pagination {
   text-align: center;
 }
+
+.info-window {
+  height: 240px;
+  width: 280px;
+}
+
+.info-window a {
+  text-decoration: none;
+}
+
+.info-content {
+  display: flex;
+  align-items: center;
+}
+
+.info-content h3 {
+  font-size: 25px;
+}
+
+.info-content p {
+  font-size: 15px;
+}
+
+.info-user {
+  padding: 0 10px 0 10px;
+}
