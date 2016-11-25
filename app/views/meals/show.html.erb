@@ -1,6 +1,6 @@
 
 <div class="banner-cover-img">
-  <div id="my_carousel" class="carousel slide" data-ride="carousel">
+    <div id="my_carousel" class="carousel slide" data-ride="carousel">
     <!-- Bulles -->
     <ol class="carousel-indicators">
     <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
@@ -129,6 +129,7 @@
   <script>
     $(document).ready(function() {
       var mealBookBox = $(".meal-book-box");
+      $(".banner-cover-img img").attr("width", $(".banner-cover-img").width());
       $(window).on("scroll", function(e) {
         var divHeight = $(".meal-container").height() + 350 - $(".meal-book-box").height();
         var scroll = $(window).scrollTop();
@@ -151,6 +152,13 @@
           handler.getMap().setZoom(14);
         }
       });
+      ;( function( $ ) {
+
+        $( '.swipebox' ).swipebox();
+
+      } )( jQuery );
+
+
 
     });
   </script>

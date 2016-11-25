@@ -43,19 +43,17 @@ class MealsController < ApplicationController
       flash[:notice] = 'meal was successfully created'
       redirect_to meal_path(@meal)
     else
-      flash[:alert] = 'unprocessable_entity'
       render :new
     end
   end
 
   def update
-      if @meal.update(meal_params)
-        flash[:notice] = 'meal was successfully updated'
-        redirect_to @meal
-      else
-        flash[:alert] = 'unprocessable_entity'
-        render :edit
-      end
+    if @meal.update(meal_params)
+      flash[:notice] = 'meal was successfully updated'
+      redirect_to @meal
+    else
+      render :edit
+    end
   end
 
  private
