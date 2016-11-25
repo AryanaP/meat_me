@@ -15,6 +15,7 @@
 <div class="container tab-content" id="host">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
+
       <% @my_meals.each do |my_meal| %>
       <div class="meeting">
         <div class="img-meeting item medium">
@@ -25,7 +26,8 @@
           <% end %>
         </div>
         <div class='meeting-body item mdlarge'>
-          <h4><%= my_meal.name.capitalize %> <%= my_meal.date.strftime('%d/%m/%Y') %>></h4>
+          <h4><%= link_to my_meal.name.capitalize, meal_path(my_meal) %> </h4>
+          <span class="date"><i class="fa fa-calendar" aria-hidden="true"></i> <%= my_meal.date.strftime('%a %d %b %Y') %> </span>
           <p><%= my_meal.description %></p>
         </div>
         <div class="participants item mdlarge">
@@ -40,11 +42,11 @@
                 <div class="meeting">
                   <div class="img-meeting item medium text-center">
                     <% if meeting.user.photo? %>
-                      <%= cl_image_tag meeting.user.photo.path, height: 100, width: 150, crop: :fill  %>
+                      <%= cl_image_tag meeting.user.photo.path, class: "avatar-large"  %>
                     <% else %>
                       <%= image_tag("default_profile.jpeg", size: "150x100", alt: "plate", class: "avatar-large")%>
                     <% end %>
-                    <h4><%= meeting.user.first_name %> <%= meeting.user.last_name %></h4>
+                    <h4><%= link_to "#{meeting.user.first_name} #{meeting.user.last_name}", user_path(meeting.user) %></h4>
                   </div>
                   <div class='meeting-body item mdlarge text-justify'>
                     <p><%= meeting.user.description %></p>
@@ -79,7 +81,7 @@
 <div class="container tab-content hidden" id="guest">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-      <% @guest_meetings.each do |meeting| %>
+      <% @my_meetings.each do |meeting| %>
         <div class="meeting">
           <div class="meeting-status item small">
             <div class="status">
@@ -102,6 +104,7 @@
           </div>
           <div class='meeting-body item mdlarge'>
             <h4><%= meeting.meal.name %></h4>
+            <span><i class="fa fa-calendar" aria-hidden="true"></i> <%= meeting.meal.date.strftime('%a %d %b %Y') %> </span>
             <p><%= meeting.meal.description %></p>
           </div>
           <div class="participants item mdlarge">
