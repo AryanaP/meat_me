@@ -38,12 +38,12 @@
                     <div class="meeting">
                       <div class="meeting-status item md">
                         <div class="status">
-                          <% if review.user.photo? %>
-                            <%= cl_image_tag review.user.photo.path, height: 100, width: 150, crop: :fill  %>
+                          <% if review.reviewer.photo? %>
+                            <%= cl_image_tag review.reviewer.photo.path, height: 100, width: 150, crop: :fill  %>
                           <% else %>
                             <%= image_tag("default_profile.jpeg", size: "150x100", alt: "profile", class: "avatar")%>
                           <% end %>
-                          <h4><%= review.user.first_name %> <%= review.user.last_name %></h4>
+                          <h4><%= review.reviewer.first_name %> <%= review.reviewer.last_name %></h4>
                         </div>
                         <div class="img-meeting item md">
                           <% review.star.to_i.times do %>
