@@ -1,19 +1,57 @@
 
 <div class="banner-cover-img">
+    <div id="my_carousel" class="carousel slide" data-ride="carousel">
+    <!-- Bulles -->
     <% if @meal.photos? %>
-      <% if @meal.photos.count == 1 %>
-        <%= link_to (cl_image_tag @meal.photos.first.path, width: 1800, height: 500, crop: :fill), cl_image_path(@meal.photos.first.path), class: "swipebox" %>
-      <% elsif @meal.photos.count > 1 %>
-        <%= link_to (cl_image_tag @meal.photos.first.path, width: 1800, height: 500, crop: :fill), cl_image_path(@meal.photos.first.path), class: "swipebox" %>
-        <% @meal.photos[1..(@meal.photos.count - 1)].each_with_index do |photo, i| %>
-          <%= cl_image_tag @meal.photos[i].path, width: 800, height: 500, crop: :fill, class: "swipebox hidden" %>
+      <% @meal.photos.each_with_index do |photo, index| %>
+        <% if index == 0 %>
+          <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+        <% else %>
+          <li data-target="#my_carousel" data-slide-to="index"></li>
         <% end %>
       <% end %>
-    <% else %>
-        <% link_to (image_tag "empty-plate.jpg"), image_path("empty-plate.jpg"), class: "swipebox" %>
     <% end %>
-</div>
+    <!-- Slides -->
+      <div class="carousel-inner">
+    <!-- Page 1 -->
+      <% if @meal.photos? %>
+        <% @meal.photos.each_with_index do |photo, index| %>
+          <% if index == 0 %>
+             <div class="item active">
+                <div class="carousel-page">
+                  <div class="img-responsive" style="margin:0px auto; height: 500px;" />
+                    <%= cl_image_tag @meal.photos[index].path, width: 1525, height: 400, crop: :fill %>
+                  </div>
+                </div>
+              </div>
+          <% else %>
+           <div class="item">
+              <div class="carousel-page">
+                <div class="img-responsive" style="margin:0px auto; height: 500px;" />
+                  <%= cl_image_tag @meal.photos[index].path, width: 1525, height: 400, crop: :fill %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div class="img-responsive" style="margin:0px auto; height: 500px;" />
+          <%= image_tag "empty-plate.jpg", height: 400 %>
+        </div>
+      <% end %>
 
+        <!-- Contrôles -->
+      <% if @meal.photos? && @meal.photos.count > 1  %>
+        <a class="left carousel-control" href="#my_carousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#my_carousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      <% end %>
+      </div>
+    </div>
+</div>
 
 <div class="container meal-container">
   <div class="row" >
@@ -66,10 +104,13 @@
     </div>
     <div class="col-xs-12 col-sm-4">
         <div class="meal-book-box">
-          <h3 class="text-center">Book this dinner</h3>
-
-            <%= button_to "Book", [@meal, :meetings], class: "btn btn-primary btn-booking", style: "width: 100%" %>
-
+          <% if user_signed_in? && current_user.id == @meal.user.id %>
+            <h3 class="text-center">Edit this dinner</h3>
+            <%= link_to "Edit",edit_meal_path(@meal), class: "btn btn-primary btn-booking", style: "width: 100%" %>
+          <% else %>
+            <h3 class="text-center">Book this dinner</h3>
+            <%= button_to "Book", [@meal, :meetings], class: "btn btn-primary btn-booking",  style: "width: 100%" %>
+          <% end %>
         </div>
     </div>
   </div>
@@ -111,13 +152,6 @@
           handler.getMap().setZoom(14);
         }
       });
-      ;( function( $ ) {
-
-        $( '.swipebox' ).swipebox();
-
-      } )( jQuery );
-
-
 
     });
   </script>
