@@ -1,11 +1,22 @@
-
 <div class="info-window">
-  <h3><%= meal.name %></h3>
-<!--   <p> <#%= meal.date %></p> -->
-
-  <% if meal.photos? %>
-      <%= cl_image_tag meal.photos.first.path, width: 80, crop: :fill %></div>
-  <% else %>
-      <%= image_tag "empty-plate.jpg", width: 80, crop: :fill %>
-  <% end %>
+  <div class="text-center">
+    <% if meal.photos? %>
+        <%= link_to (cl_image_tag meal.photos.first.path, width: 260, height: 126, crop: :fill), meal_path(meal) %>
+    <% else %>
+        <%= link_to (image_tag asset_path('default_card.jpg'), width: 260, height: 126, crop: :fill), meal_path(meal) %>
+    <% end %>
+  </div>
+  <h3><%= link_to "#{meal.food_type} food", meal_path(meal) %></h3>
+  <div class="info-content">
+    <div class="info-avatar"><% if meal.user.photo? %>
+            <%= cl_image_tag meal.user.photo.path, height: 30, width: 30, crop: :fill, gravity: :face, class: "card-user avatar" %>
+          <% else %>
+            <%= image_tag "default_profile.jpg", class: "avatar" %>
+          <% end %>
+    </div>
+    <div class="info-user"><%= meal.user.first_name %></div>
+    <div class="info-rating"><% meal.user.reviews.average(:star).to_i.times do %>
+          <i class="fa fa-star" style="color: #ffb400"></i>
+        <% end %></div>
+  </div>
 </div>

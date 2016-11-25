@@ -1,12 +1,17 @@
 
 <div class="banner-cover-img">
-  <% if @meal.photos? %>
-    <div>
-      <%= cl_image_tag @meal.photos.first.path, width: 1525, height: 400, crop: :fill %>
-    </div>
-  <% else %>
-    <div> <%= image_tag "empty-plate.jpg" %></div>
-  <% end %>
+    <% if @meal.photos? %>
+      <% if @meal.photos.count == 1 %>
+        <%= link_to (cl_image_tag @meal.photos.first.path, width: 1800, height: 500, crop: :fill), cl_image_path(@meal.photos.first.path), class: "swipebox" %>
+      <% elsif @meal.photos.count > 1 %>
+        <%= link_to (cl_image_tag @meal.photos.first.path, width: 1800, height: 500, crop: :fill), cl_image_path(@meal.photos.first.path), class: "swipebox" %>
+        <% @meal.photos[1..(@meal.photos.count - 1)].each_with_index do |photo, i| %>
+          <%= cl_image_tag @meal.photos[i].path, width: 800, height: 500, crop: :fill, class: "swipebox hidden" %>
+        <% end %>
+      <% end %>
+    <% else %>
+        <% link_to (image_tag "empty-plate.jpg"), image_path("empty-plate.jpg"), class: "swipebox" %>
+    <% end %>
 </div>
 
 
@@ -83,6 +88,7 @@
   <script>
     $(document).ready(function() {
       var mealBookBox = $(".meal-book-box");
+      $(".banner-cover-img img").attr("width", $(".banner-cover-img").width());
       $(window).on("scroll", function(e) {
         var divHeight = $(".meal-container").height() + 350 - $(".meal-book-box").height();
         var scroll = $(window).scrollTop();
@@ -105,6 +111,13 @@
           handler.getMap().setZoom(14);
         }
       });
+      ;( function( $ ) {
+
+        $( '.swipebox' ).swipebox();
+
+      } )( jQuery );
+
+
 
     });
   </script>
