@@ -16,8 +16,8 @@
     <div class="col-xs-12 col-sm-6 col-sm-offset-1">
       <div class="header-flat-details">
         <div class="header-meal-presentation">
-          <h1><%= @meal.name %> <%= @meal.date.strftime('%d/%m/%Y') %></h1>
-          <p><%= @meal.city %> - <%= @meal.price %>€ </p>
+          <h1><%= @meal.name %> </h1>
+          <p><%= @meal.date.strftime('%d/%m/%Y') %> - <%= @meal.city %><%= (@meal.price.to_i > 0) ? " - #{@meal.price} €" : "" %> </p>
           <% if user_signed_in? && current_user.id == @meal.user.id %>
             <%= link_to 'Edit', edit_meal_path(@meal) %>
           <% end %>
